@@ -106,7 +106,7 @@ if st.session_state.page == "accueil_interne":
     # 🔚 Bouton de retour à l’accueil (page d’introduction)
     st.markdown("---")
     if st.button("🔚 Retour à l’accueil"):
-        st.session_state.page = "accueil"
+        st.session_state.page = "Accueil"
         st.rerun()
   
 
