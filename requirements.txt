@@ -1,13 +1,10 @@
 streamlit
-scikit-learn
 pandas
 numpy
-matplotlib
+scikit-learn
 joblib
-openpyxl
+matplotlib
 plotly
-tensorflow
-streamlit>=1.31
-python-dotenv
-XlsxWriter
 fpdf
+python-dotenv
+xlsxwriter
