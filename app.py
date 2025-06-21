@@ -103,6 +103,10 @@ if st.session_state.page == "accueil_interne":
         if st.button("💬 Assistant IA"):
             st.session_state.page = "Assistant"
             st.rerun()
+    with col4:
+        if st.button("Sortir"):
+            st.session_state.page = "Accueil"       
+
 # Afficher la bonne section selon la page
 #################
 # BASE DE DONNEE
