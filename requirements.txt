@@ -1,0 +1,13 @@
+streamlit
+scikit-learn
+pandas
+numpy
+matplotlib
+joblib
+openpyxl
+plotly
+tensorflow
+streamlit>=1.31
+python-dotenv
+XlsxWriter
+fpdf
