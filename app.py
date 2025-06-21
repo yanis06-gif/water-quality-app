@@ -257,14 +257,12 @@ elif st.session_state.page == "Prédiction":
     if st.button("🔮 Lancer la prédiction"):
         model_path = os.path.join("models", f"modele_{param_cible.replace(' ', '_')}.pkl")
         path_pk1 = os.path.join("models", model_name + ".pk1")
-        path_pkl = os.path.join("models", model_name + ".pkl")
 
         try:
             # Chargement du modèle
             if os.path.exists(path_pk1):
                 modele = joblib.load(path_pk1)
-            elif os.path.exists(path_pkl):
-                modele = joblib.load(path_pkl)
+            
             else:
                 st.warning("🚫 Modèle introuvable.")
                 st.stop()
