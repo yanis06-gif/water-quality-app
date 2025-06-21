@@ -255,7 +255,7 @@ elif st.session_state.page == "Prédiction":
             valeurs[param] = st.number_input(param, value=0.0, format="%.3f", key=f"pred_{param}")
 
     if st.button("🔮 Lancer la prédiction"):
-        model_name = f"modele_{param_cible.lower().replace(' ', '_')}"
+        model_path = os.path.join("models", f"modele_{param_cible.replace(' ', '_')}.pkl")
         path_pk1 = os.path.join("models", model_name + ".pk1")
         path_pkl = os.path.join("models", model_name + ".pkl")
 
