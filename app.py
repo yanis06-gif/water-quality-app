@@ -220,15 +220,16 @@ if st.session_state.page == "Base de données":
 # Prediction d'un paramètre ######
 ############################
 elif st.session_state.page == "Prédiction":
-    import joblib
     import os
+    import joblib
     import numpy as np
     import matplotlib.pyplot as plt
+    import pandas as pd
 
     st.header("📊 Prédiction d’un paramètre de qualité de l’eau")
     st.markdown("Anticipez une valeur manquante grâce à un modèle IA intelligent, visualisez les résultats et recevez des recommandations.")
 
-    # Paramètres officiels
+    # 🔹 Liste officielle des 23 paramètres selon les normes algériennes
     parametres = [
         "Total Coliform", "Escherichia Coli", "Faecal Streptococci", "Turbidity",
         "pH", "Temperature", "Free Chlorine", "Chlorates", "Sulfate", "Magnesium",
@@ -237,6 +238,7 @@ elif st.session_state.page == "Prédiction":
         "Colour", "Smell", "Taste"
     ]
 
+    # 🔹 Normes algériennes simplifiées
     normes = {
         "pH": (6.5, 8.5), "Turbidity": 5, "Temperature": 25, "Free Chlorine": (0.2, 0.5),
         "Sulfate": 250, "Magnesium": 50, "Calcium": 200, "Conductivity": 2800,
@@ -246,8 +248,12 @@ elif st.session_state.page == "Prédiction":
         "Faecal Streptococci": 0, "Colour": 0, "Smell": 0, "Taste": 0
     }
 
+    # 🔸 Choix du paramètre cible à prédire
     param_cible = st.selectbox("🎯 Paramètre à prédire :", parametres)
+    model_name = f"modele_{param_cible.replace(' ', '_')}.pkl"
+    model_path = os.path.join("models", model_name)
 
+    # 🧪 Saisie des autres paramètres
     st.markdown("### 🧪 Entrez les autres paramètres mesurés :")
     valeurs = {}
     for param in parametres:
@@ -255,38 +261,30 @@ elif st.session_state.page == "Prédiction":
             valeurs[param] = st.number_input(param, value=0.0, format="%.3f", key=f"pred_{param}")
 
     if st.button("🔮 Lancer la prédiction"):
-        model_path = os.path.join("models", f"modele_{param_cible.replace(' ', '_')}.pkl")
-        path_pk1 = os.path.join("models", model_name + ".pk1")
-
         try:
-            # Chargement du modèle
-            if os.path.exists(path_pk1):
-                modele = joblib.load(path_pk1)
-            
-            else:
+            if not os.path.exists(model_path):
                 st.warning("🚫 Modèle introuvable.")
                 st.stop()
 
-            # Prédiction
+            modele = joblib.load(model_path)
             X_input = np.array([valeurs[p] for p in valeurs]).reshape(1, -1)
             prediction = modele.predict(X_input)[0]
-
             st.success(f"✅ **{param_cible} prédit :** `{round(prediction, 3)}`")
 
-            # Visualisation : bar simple avec normes
+            # 🔍 Visualisation avec normes
             if param_cible in normes:
-                st.markdown("### 📊 Visualisation par rapport à la norme")
-                plt.figure(figsize=(6, 1.5))
-                plt.barh([param_cible], [prediction], color="skyblue")
+                st.markdown("### 📊 Comparaison avec la norme")
+                fig, ax = plt.subplots(figsize=(6, 1.5))
+                ax.barh([param_cible], [prediction], color="skyblue")
                 if isinstance(normes[param_cible], tuple):
-                    plt.axvline(normes[param_cible][0], color="green", linestyle="--", label="Min")
-                    plt.axvline(normes[param_cible][1], color="red", linestyle="--", label="Max")
+                    ax.axvline(normes[param_cible][0], color="green", linestyle="--", label="Min")
+                    ax.axvline(normes[param_cible][1], color="red", linestyle="--", label="Max")
                 else:
-                    plt.axvline(normes[param_cible], color="red", linestyle="--", label="Norme")
-                plt.legend()
-                st.pyplot(plt)
+                    ax.axvline(normes[param_cible], color="red", linestyle="--", label="Norme")
+                ax.legend()
+                st.pyplot(fig)
 
-                # Commentaire intelligent
+                # 💬 Commentaire automatique
                 commentaire = "✅ Valeur conforme."
                 if isinstance(normes[param_cible], tuple):
                     if prediction < normes[param_cible][0]:
@@ -298,31 +296,31 @@ elif st.session_state.page == "Prédiction":
                         commentaire = "⚠️ Valeur au-dessus de la norme."
                     elif prediction < normes[param_cible]:
                         commentaire = "⚠️ Valeur anormalement basse."
-
                 st.info(commentaire)
 
-            # Affichage valeurs utilisées
-            with st.expander("📋 Voir les valeurs utilisées"):
+            # 📋 Valeurs utilisées
+            with st.expander("📋 Voir les valeurs utilisées pour cette prédiction"):
                 for k, v in valeurs.items():
-                    st.write(f"**{k}** : {v}")
+                    st.markdown(f"- **{k}** : {v}")
 
-            # Sauvegarde (historique local)
-            if st.checkbox("💾 Sauvegarder cette prédiction ?"):
-                sauvegarde_path = "historique_predictions.pkl"
-                new_entry = {"Paramètre": param_cible, "Valeur prédite": prediction}
-                new_entry.update(valeurs)
-                if os.path.exists(sauvegarde_path):
-                    df_hist = pd.read_pickle(sauvegarde_path)
+            # 💾 Option de sauvegarde
+            if st.checkbox("💾 Sauvegarder cette prédiction"):
+                save_path = "historique_predictions.pkl"
+                ligne = {"Paramètre": param_cible, "Valeur prédite": prediction}
+                ligne.update(valeurs)
+                if os.path.exists(save_path):
+                    df_old = pd.read_pickle(save_path)
                 else:
-                    df_hist = pd.DataFrame()
-                df_hist = pd.concat([df_hist, pd.DataFrame([new_entry])], ignore_index=True)
-                df_hist.to_pickle(sauvegarde_path)
-                st.success("📁 Prédiction sauvegardée avec succès.")
+                    df_old = pd.DataFrame()
+                df_new = pd.concat([df_old, pd.DataFrame([ligne])], ignore_index=True)
+                df_new.to_pickle(save_path)
+                st.success("📁 Résultat enregistré avec succès.")
 
         except Exception as e:
-            st.error("❌ Une erreur est survenue.")
+            st.error("❌ Une erreur est survenue pendant la prédiction.")
             st.code(str(e))
 
+    # 🔙 Retour
     st.markdown("---")
     if st.button("🔙 Retour au menu principal"):
         st.session_state.page = "accueil_interne"
