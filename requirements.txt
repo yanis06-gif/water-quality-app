@@ -8,3 +8,4 @@ plotly
 fpdf
 python-dotenv
 xlsxwriter
+fpdf==1.7.2

@@ -7,6 +7,72 @@ from datetime import datetime
 from io import BytesIO
 import traceback
 import plotly.express as px
+
+from fpdf import FPDF
+
+def generer_rapport_prelevements(selection_df, normes):
+    pdf = FPDF()
+    pdf.set_auto_page_break(auto=True, margin=15)
+
+    for index, row in selection_df.iterrows():
+        pdf.add_page()
+        pdf.set_font("Arial", "B", 14)
+        pdf.cell(0, 10, "Rapport d'analyse de l'eau potable", ln=True, align="C")
+        pdf.ln(8)
+
+        # Données générales
+        pdf.set_font("Arial", "B", 12)
+        pdf.cell(0, 10, f"🧾 Code échantillon : {row.get('Code', 'N/A')}", ln=True)
+        pdf.set_font("Arial", "", 11)
+        pdf.cell(0, 8, f"📅 Date : {row.get('Date', '')}   ⏰ Heure : {row.get('Heure', '')}", ln=True)
+        pdf.cell(0, 8, f"📍 Localisation : {row.get('Localisation', '')}", ln=True)
+        pdf.cell(0, 8, f"🏢 Entreprise : {row.get('Entreprise', '')}", ln=True)
+        pdf.cell(0, 8, f"👤 Analyste : {row.get('Analyste', '')}", ln=True)
+        pdf.ln(5)
+
+        # Paramètres mesurés
+        pdf.set_font("Arial", "B", 12)
+        pdf.cell(0, 8, "🔬 Paramètres mesurés :", ln=True)
+        pdf.set_font("Arial", "", 11)
+        for col in row.index:
+            if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code", "Classe"]:
+                val = row[col]
+                if pd.notnull(val):
+                    pdf.cell(0, 7, f"• {col} : {val}", ln=True)
+
+        # Alertes
+        alertes = []
+        for param, val in row.items():
+            if param in normes and pd.notnull(val):
+                norme = normes[param]
+                if isinstance(norme, tuple):
+                    if val < norme[0] or val > norme[1]:
+                        alertes.append(f"⚠️ {param} = {val} (hors [{norme[0]} - {norme[1]}])")
+                else:
+                    if val > norme:
+                        alertes.append(f"⚠️ {param} = {val} > {norme}")
+
+        if alertes:
+            pdf.ln(4)
+            pdf.set_font("Arial", "B", 12)
+            pdf.cell(0, 8, "🚨 Alertes détectées :", ln=True)
+            pdf.set_font("Arial", "", 11)
+            for alerte in alertes:
+                pdf.cell(0, 7, alerte, ln=True)
+        else:
+            pdf.ln(4)
+            pdf.set_font("Arial", "I", 11)
+            pdf.cell(0, 8, "✅ Aucun dépassement des normes détecté.", ln=True)
+
+        # Classe IA
+        if "Classe" in row and pd.notnull(row["Classe"]):
+            pdf.ln(4)
+            pdf.set_font("Arial", "B", 12)
+            pdf.cell(0, 8, f"🧠 Classe prédite : {row['Classe']}", ln=True)
+
+    return pdf.output(dest="S").encode("latin-1")
+
+
 # ✅ Liste officielle des 23 paramètres utilisés dans l'application
 parametres = [
     "Total Coliform", "Escherichia Coli", "Faecal Streptococci", "Turbidity",
@@ -190,10 +256,11 @@ if st.session_state.page == "Base de données":
             st.session_state.df_prelèvements.to_pickle("prelevements_sauvegarde.pkl")
             st.success("✅ Prélèvement enregistré avec succès.")
 
-    # 📊 Affichage de la base
+        # 📊 Affichage de la base
     st.markdown("### 📊 Données enregistrées")
     if not st.session_state.df_prelèvements.empty:
         st.dataframe(st.session_state.df_prelèvements, use_container_width=True)
+
         with st.expander("📤 Exporter les données"):
             # CSV
             csv = st.session_state.df_prelèvements.to_csv(index=False).encode("utf-8")
@@ -213,6 +280,38 @@ if st.session_state.page == "Base de données":
                 file_name="base_donnees.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
+        # 🖨️ Bloc PDF à coller ici, même niveau d'indentation que "with st.expander"
+        st.markdown("### 🖨️ Générer un rapport PDF multi-prélèvements")
+
+        if not st.session_state.df_prelèvements.empty:
+            df = st.session_state.df_prelèvements.copy()
+
+            # Sélection multiple
+            selection = st.multiselect("✅ Sélectionner les prélèvements à inclure (par Code)", options=df["Code"].unique().tolist())
+
+            if selection:
+                selection_df = df[df["Code"].isin(selection)]
+
+                normes_pdf = {
+                    "Total Coliform": 0, "Escherichia Coli": 0, "Faecal Streptococci": 0, "Turbidity": 5,
+                    "pH": (6.5, 8.5), "Temperature": 25, "Free Chlorine": (0.2, 0.5), "Chlorates": 0.7,
+                    "Sulfate": 250, "Magnesium": 50, "Calcium": 200, "Conductivity": 2800,
+                    "Dry Residue": 1500, "Complete Alkaline Title": (100, 300), "Nitrite": 0.5,
+                    "Ammonium": 0.5, "Phosphate": 5, "Nitrate": 50, "Iron": 0.3, "Manganese": 0.1,
+                    "Colour": 0, "Smell": 0, "Taste": 0
+                }
+
+                pdf_bytes = generer_rapport_prelevements(selection_df, normes_pdf)
+                st.download_button(
+                    label="📄 Télécharger le rapport PDF",
+                    data=pdf_bytes,
+                    file_name="rapport_prelevements.pdf",
+                    mime="application/pdf"
+                )
+            else:
+                st.info("📝 Sélectionnez au moins un prélèvement pour générer un rapport.")
+
     else:
         st.warning("⚠️ Aucune donnée enregistrée.")
 
