@@ -703,7 +703,7 @@ elif st.session_state.page == "Assistant":
 
         elif "fer" in question_lower or "manganèse" in question_lower:
             st.info("🧲 Le **fer** et le **manganèse** sont naturellement présents dans le sol.\nIls doivent être filtrés si leurs concentrations dépassent **0.3 mg/L** pour le fer et **0.1 mg/L** pour le manganèse.\nIls peuvent colorer l’eau et endommager les canalisations.")
-                elif "turbidité" in question_lower:
+        elif "turbidité" in question_lower:
             st.info("🌫️ La **turbidité** reflète la clarté de l’eau.\nElle ne doit pas dépasser **5 NTU**.\nUn excès peut indiquer la présence de matières en suspension ou de micro-organismes. Un filtre ou une décantation est souvent conseillé.")
 
         elif "température" in question_lower:
