@@ -780,7 +780,38 @@ elif st.session_state.page == "Assistant":
         else:
             st.info("🤖 Je suis encore en cours d’apprentissage.\nEssayez une question sur les prélèvements, la classification, les normes ou les visualisations.")
             st.markdown("📍 *Exemples de questions :*\n- Comment classifier un prélèvement ?\n- Que signifie la classe « Mauvaise » ?\n- Comment exporter mes résultats ?")
+        st.markdown("---")
+        st.subheader("📚 Foire Aux Questions (FAQ)")
 
+        with st.expander("🔍 Comment visualiser un paramètre ?"):
+            st.markdown("""
+            - Allez dans le menu **Visualisation**.
+            - Sélectionnez un paramètre (pH, nitrate...).
+            - Consultez les courbes, histogrammes et seuils réglementaires.
+            """)
+
+        with st.expander("📈 Comment fonctionne la classification intelligente ?"):
+            st.markdown("""
+            - Entrez les 23 paramètres d’un échantillon dans **Classification**.
+            - L’IA vous donne une **classe de qualité** (Très bonne à Très mauvaise).
+            - Si des normes sont dépassées, des **alertes et conseils** s’affichent automatiquement.
+            """)
+
+        with st.expander("⚠️ Que faire si l’eau n’est pas conforme ?"):
+            st.markdown("""
+            - Consultez les alertes sur chaque paramètre.
+            - Utilisez l’onglet **Pollution** pour identifier le type de pollution.
+            - Appliquez les recommandations proposées automatiquement.
+            """)
+
+        with st.expander("📤 Puis-je exporter mes données ?"):
+            st.markdown("""
+            - Oui, dans **Base de Données**, vous pouvez exporter au format **CSV** ou **Excel**.
+            - Cela permet d’archiver, d’analyser ou de transmettre les résultats.
+            """)
+
+        with st.expander("🧪 Quels sont les paramètres analysés ?"):
+            st.markdown(", ".join(st.session_state.parametres_dynamiques))
     # Bouton retour
     st.markdown("---")
     if st.button("🔙 Retour au menu principal"):
