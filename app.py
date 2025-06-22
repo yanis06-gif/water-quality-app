@@ -811,7 +811,11 @@ elif st.session_state.page == "Assistant":
             """)
 
         with st.expander("🧪 Quels sont les paramètres analysés ?"):
-            st.markdown(", ".join(st.session_state.parametres_dynamiques))
+            if "parametres_dynamiques" in st.session_state:
+                st.markdown(", ".join(st.session_state.parametres_dynamiques))
+            else:
+                st.info("⚠️ Les paramètres dynamiques ne sont pas encore chargés. Veuillez d’abord accéder à la base de données.")
+
     # Bouton retour
     st.markdown("---")
     if st.button("🔙 Retour au menu principal"):
