@@ -677,6 +677,86 @@ elif st.session_state.page == "Assistant":
                 "Phosphate", "Nitrate", "Iron", "Manganese", "Colour", "Smell", "Taste"
             ]:
                 st.markdown(f"- {p}")
+                elif "chlore" in question_lower:
+            st.info("💧 Le **chlore libre** doit être maintenu entre **0.2 et 0.5 mg/L** pour garantir une désinfection efficace.\nEn dessous, il y a un risque microbiologique. Au-dessus, il peut y avoir un goût désagréable ou des effets secondaires.")
+
+        elif "ph" in question_lower:
+            st.info("🧪 Le **pH idéal de l’eau potable** est entre **6.5 et 8.5**.\nUn pH trop acide (<6.5) favorise la corrosion des tuyaux, un pH trop basique (>8.5) peut affecter le goût et réduire l'efficacité du chlore.")
+
+        elif "conductivité" in question_lower:
+            st.info("⚡ La **conductivité** mesure la concentration en sels dissous dans l’eau.\nUne conductivité supérieure à **2800 µS/cm** peut indiquer une eau trop minéralisée (souvent en lien avec des infiltrations salines ou industrielles).")
+
+        elif "goût" in question_lower or "odeur" in question_lower or "couleur" in question_lower:
+            st.info("👃👅👁️ Le **goût, l’odeur et la couleur** sont des indicateurs organoleptiques.\nToute anomalie dans ces paramètres peut signaler une contamination organique ou chimique, même si les autres paramètres sont normaux.")
+
+        elif "résultat parfait" in question_lower or "eau parfaite" in question_lower:
+            st.info("✅ Une eau potable parfaite aura :\n- **Coliformes, E. coli, Streptocoques** = 0\n- **pH entre 6.5 et 8.5**, **Turbidité < 5**\n- **Chlore libre entre 0.2 et 0.5 mg/L**\n- Tous les autres paramètres sous les normes maximales.")
+
+        elif "analyse complète" in question_lower or "tous les paramètres" in question_lower:
+            st.info("🔬 L’analyse complète repose sur **23 paramètres**, classés en catégories :\n- Bactériologiques : Coliformes, E. coli, Streptocoques\n- Physico-chimiques : pH, température, chlore, etc.\n- Minéraux : sulfate, calcium, magnésium, etc.\n- Métaux : fer, manganèse\n- Organoleptiques : goût, odeur, couleur")
+
+        elif "quelle est la meilleure eau" in question_lower:
+            st.info("💧 L’eau de **classe Très bonne** est la meilleure :\nTous les paramètres sont conformes, sans dépassement ni alerte.\nElle est **immédiatement potable**, sans besoin de traitement.")
+
+        elif "nitrate" in question_lower:
+            st.info("🌿 Le **nitrate** ne doit pas dépasser **50 mg/L**. Il provient souvent des engrais agricoles.\nUn excès peut provoquer des problèmes de santé, surtout chez les nourrissons.")
+
+        elif "fer" in question_lower or "manganèse" in question_lower:
+            st.info("🧲 Le **fer** et le **manganèse** sont naturellement présents dans le sol.\nIls doivent être filtrés si leurs concentrations dépassent **0.3 mg/L** pour le fer et **0.1 mg/L** pour le manganèse.\nIls peuvent colorer l’eau et endommager les canalisations.")
+                elif "turbidité" in question_lower:
+            st.info("🌫️ La **turbidité** reflète la clarté de l’eau.\nElle ne doit pas dépasser **5 NTU**.\nUn excès peut indiquer la présence de matières en suspension ou de micro-organismes. Un filtre ou une décantation est souvent conseillé.")
+
+        elif "température" in question_lower:
+            st.info("🌡️ Une eau potable doit rester en dessous de **25°C**.\nUne température élevée favorise le développement bactérien et réduit l’efficacité du chlore.")
+
+        elif "chlorates" in question_lower:
+            st.info("🧪 Les **chlorates** sont des sous-produits de la désinfection.\nIls doivent rester inférieurs à **0.7 mg/L**. Un excès signifie souvent un dosage excessif ou un vieillissement du chlore utilisé.")
+
+        elif "alcalinité" in question_lower or "titre alcalin" in question_lower:
+            st.info("⚖️ Le **titre alcalin complet** mesure la capacité de l’eau à neutraliser l’acidité.\nIl doit rester entre **100 et 300 mg/L** pour assurer une bonne stabilité chimique de l’eau.")
+
+        elif "résidu sec" in question_lower or "dry residue" in question_lower:
+            st.info("🧂 Le **résidu sec** indique la teneur totale en sels dissous.\nIl ne doit pas dépasser **1500 mg/L**. Un excès signale une forte minéralisation.")
+
+        elif "analyse rapide" in question_lower or "analyse simple" in question_lower:
+            st.info("⏱️ Pour une **analyse rapide**, concentrez-vous sur :\n- **Coliformes**, **E. coli** (sécurité microbio)\n- **pH**, **chlore libre**, **turbidité** (sécurité physico-chimique)\n- **Nitrate**, **fer**, **manganèse** (sécurité minérale et métal)")
+
+        elif "pollution" in question_lower:
+            st.info("⚠️ Votre application détecte automatiquement 7 types de pollution :\n- **Bactériologique** : coliformes, E. coli, streptocoques\n- **Physico-chimique** : chlore, pH, température, chlorates\n- **Minérale** : sulfate, magnésium, etc.\n- **Organique** : nitrate, phosphate...\n- **Métaux** : fer, manganèse\n- **Organoleptique** : goût, odeur, couleur\n- **Alcalinité**")
+
+        elif "problème courant" in question_lower or "problèmes fréquents" in question_lower:
+            st.info("🧾 Les problèmes les plus fréquents en Algérie sont :\n- pH trop bas (<6.5)\n- chlore libre absent\n- présence de coliformes\n- nitrate élevé dans les zones agricoles\n- eau calcaire (calcium et magnésium élevés)")
+
+        elif "comment corriger" in question_lower:
+            st.info("🔧 Votre application donne automatiquement des conseils pour chaque paramètre hors norme.\nPar exemple :\n- **pH bas** → ajouter des agents alcalins\n- **Chlore faible** → réajuster la chloration\n- **Nitrate élevé** → améliorer le traitement ou changer de source\n- **Fer/manganèse** → filtre catalytique")
+
+        elif "que faire si" in question_lower:
+            st.info("❓ En cas d’anomalie détectée :\n- Consultez les alertes affichées après la classification\n- Suivez les conseils pour chaque paramètre\n- Vérifiez le type de pollution dans l’onglet **Pollution**\n- Exportez vos données pour les partager avec un laboratoire")
+
+        elif "exporter" in question_lower or "télécharger" in question_lower:
+            st.info("📤 Vous pouvez exporter les données de prélèvement dans l’onglet **Base de Données**.\nFormats disponibles : **CSV** (tableur) et **Excel** (analyses, partage, archivage).")
+
+        elif "modèle" in question_lower or "intelligence artificielle" in question_lower:
+            st.info("🤖 L’application utilise plusieurs modèles d’intelligence artificielle :\n- **Random Forest Classifier** pour classer la qualité de l’eau\n- **Détection manuelle intelligente** pour identifier le type de pollution\nLes modèles sont pré-entraînés à partir de normes algériennes et de données d’analyses.")
+
+        elif "comment fonctionne" in question_lower:
+            st.info("⚙️ L’application fonctionne par étapes :\n1. Vous entrez les résultats de votre prélèvement\n2. Le modèle IA classe la qualité (Très bonne → Très mauvaise)\n3. Les paramètres sont vérifiés automatiquement\n4. Des alertes sont générées si nécessaire\n5. L’origine de la pollution est identifiée")
+
+        elif "norme" in question_lower:
+            st.info("📏 Les normes utilisées sont les **normes algériennes** en vigueur (ex : décret exécutif n° 11-219).\nChaque paramètre a une limite maximale (et parfois minimale) fixée par les autorités sanitaires.")
+
+        elif "ajouter un paramètre" in question_lower:
+            st.info("➕ Vous pouvez ajouter/supprimer des paramètres via la section **Base de Données**.\nL’interface permet de sélectionner dynamiquement les paramètres mesurés.")
+
+        elif "base de données" in question_lower:
+            st.info("📂 Tous les prélèvements sont stockés dans un fichier `prelevements_sauvegarde.pkl`.\nVous pouvez le vider, l’exporter, ou l’analyser dans l’application.")
+
+        elif "version mobile" in question_lower:
+            st.info("📱 L’application peut être déployée comme site web responsive, utilisable sur smartphone.\nVous pouvez aussi envisager une conversion en APK avec des outils comme Streamlit-to-APK ou Flutter WebView.")
+
+        elif "mémoire" in question_lower or "présentation" in question_lower:
+            st.info("📝 Cette application peut être présentée dans un mémoire comme un outil d’aide à la décision pour les analyses d’eau potable.\nElle combine l’IA, les normes nationales, la visualisation interactive et la détection automatisée de pollution.")
+
 
         elif "erreur" in question_lower or "ne fonctionne pas" in question_lower or "problème" in question_lower:
             st.warning("❌ Assurez-vous d’avoir bien **enregistré au moins un prélèvement**.\nSinon, les fonctionnalités comme la visualisation ou l’export ne fonctionneront pas correctement.")
