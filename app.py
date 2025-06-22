@@ -22,17 +22,17 @@ def generer_rapport_prelevements(selection_df, normes):
 
         # Données générales
         pdf.set_font("Arial", "B", 12)
-        pdf.cell(0, 10, f"🧾 Code échantillon : {row.get('Code', 'N/A')}", ln=True)
+        pdf.cell(0, 10, f"Code échantillon : {row.get('Code', 'N/A')}", ln=True)
         pdf.set_font("Arial", "", 11)
-        pdf.cell(0, 8, f"📅 Date : {row.get('Date', '')}   ⏰ Heure : {row.get('Heure', '')}", ln=True)
-        pdf.cell(0, 8, f"📍 Localisation : {row.get('Localisation', '')}", ln=True)
-        pdf.cell(0, 8, f"🏢 Entreprise : {row.get('Entreprise', '')}", ln=True)
-        pdf.cell(0, 8, f"👤 Analyste : {row.get('Analyste', '')}", ln=True)
+        pdf.cell(0, 8, f"Date : {row.get('Date', '')}   ⏰ Heure : {row.get('Heure', '')}", ln=True)
+        pdf.cell(0, 8, f"Localisation : {row.get('Localisation', '')}", ln=True)
+        pdf.cell(0, 8, f"Entreprise : {row.get('Entreprise', '')}", ln=True)
+        pdf.cell(0, 8, f"Analyste : {row.get('Analyste', '')}", ln=True)
         pdf.ln(5)
 
         # Paramètres mesurés
         pdf.set_font("Arial", "B", 12)
-        pdf.cell(0, 8, "🔬 Paramètres mesurés :", ln=True)
+        pdf.cell(0, 8, "Paramètres mesurés :", ln=True)
         pdf.set_font("Arial", "", 11)
         for col in row.index:
             if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code", "Classe"]:
@@ -304,7 +304,7 @@ if st.session_state.page == "Base de données":
 
                 pdf_bytes = generer_rapport_prelevements(selection_df, normes_pdf)
                 st.download_button(
-                    label="📄 Télécharger le rapport PDF",
+                    label=" Télécharger le rapport PDF",
                     data=pdf_bytes,
                     file_name="rapport_prelevements.pdf",
                     mime="application/pdf"
