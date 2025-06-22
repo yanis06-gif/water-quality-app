@@ -168,6 +168,7 @@ if st.session_state.page == "Base de données":
             localisation = st.text_input("📍 Localisation")
         with col2:
             entreprise = st.text_input("🏢 Entreprise")
+            préleveur = st.text_input("🧪 Préleveur")
             analyste = st.text_input("🧪 Analyste")
             code = st.text_input("🧾 Code échantillon")
 
