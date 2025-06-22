@@ -38,7 +38,7 @@ def generer_rapport_prelevements(df, normes):
         pdf.set_font("Arial", "", 11)
 
         for col in df.columns:
-            if col in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code"]:
+            if col in ["Date", "Heure", "Localisation", "Entreprise", "Préleveur", "Analyste", "Code"]:
                 continue
 
             valeur = row[col]
