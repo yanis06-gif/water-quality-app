@@ -9,68 +9,58 @@ import traceback
 import plotly.express as px
 
 from fpdf import FPDF
+from io import BytesIO
 
-def generer_rapport_prelevements(selection_df, normes):
+def generer_rapport_prelevements(df, normes):
     pdf = FPDF()
-    pdf.set_auto_page_break(auto=True, margin=15)
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
 
-    for index, row in selection_df.iterrows():
-        pdf.add_page()
-        pdf.set_font("Arial", "B", 14)
-        pdf.cell(0, 10, "Rapport d'analyse de l'eau potable", ln=True, align="C")
-        pdf.ln(8)
+    pdf.cell(0, 10, "Rapport d'analyse de la qualité de l'eau", ln=True)
+    pdf.ln(5)
 
-        # Données générales
+    for idx, row in df.iterrows():
         pdf.set_font("Arial", "B", 12)
-        pdf.cell(0, 10, f"Code échantillon : {row.get('Code', 'N/A')}", ln=True)
+        pdf.cell(0, 10, f"Prelevement : {row.get('Code', 'N/A')}", ln=True)
+        pdf.set_font("Arial", size=11)
+        pdf.cell(0, 10, f"Date : {row.get('Date', '')}  Heure : {row.get('Heure', '')}", ln=True)
+        pdf.cell(0, 10, f"Localisation : {row.get('Localisation', '')}", ln=True)
+        pdf.cell(0, 10, f"Entreprise : {row.get('Entreprise', '')}", ln=True)
+        pdf.cell(0, 10, f"Analyste : {row.get('Analyste', '')}", ln=True)
+        pdf.ln(4)
+
+        pdf.set_font("Arial", "B", 11)
+        pdf.cell(60, 8, "Paramètre", border=1)
+        pdf.cell(30, 8, "Valeur", border=1)
+        pdf.cell(40, 8, "Norme", border=1)
+        pdf.cell(60, 8, "Conformité", border=1, ln=True)
         pdf.set_font("Arial", "", 11)
-        pdf.cell(0, 8, f"Date : {row.get('Date', '')}   ⏰ Heure : {row.get('Heure', '')}", ln=True)
-        pdf.cell(0, 8, f"Localisation : {row.get('Localisation', '')}", ln=True)
-        pdf.cell(0, 8, f"Entreprise : {row.get('Entreprise', '')}", ln=True)
-        pdf.cell(0, 8, f"Analyste : {row.get('Analyste', '')}", ln=True)
-        pdf.ln(5)
 
-        # Paramètres mesurés
-        pdf.set_font("Arial", "B", 12)
-        pdf.cell(0, 8, "Paramètres mesurés :", ln=True)
-        pdf.set_font("Arial", "", 11)
-        for col in row.index:
-            if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code", "Classe"]:
-                val = row[col]
-                if pd.notnull(val):
-                    pdf.cell(0, 7, f"• {col} : {val}", ln=True)
+        for col in df.columns:
+            if col in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code"]:
+                continue
 
-        # Alertes
-        alertes = []
-        for param, val in row.items():
-            if param in normes and pd.notnull(val):
-                norme = normes[param]
-                if isinstance(norme, tuple):
-                    if val < norme[0] or val > norme[1]:
-                        alertes.append(f"⚠️ {param} = {val} (hors [{norme[0]} - {norme[1]}])")
-                else:
-                    if val > norme:
-                        alertes.append(f"⚠️ {param} = {val} > {norme}")
+            valeur = row[col]
+            norme = normes.get(col)
+            if norme is None:
+                continue
 
-        if alertes:
-            pdf.ln(4)
-            pdf.set_font("Arial", "B", 12)
-            pdf.cell(0, 8, "🚨 Alertes détectées :", ln=True)
-            pdf.set_font("Arial", "", 11)
-            for alerte in alertes:
-                pdf.cell(0, 7, alerte, ln=True)
-        else:
-            pdf.ln(4)
-            pdf.set_font("Arial", "I", 11)
-            pdf.cell(0, 8, "✅ Aucun dépassement des normes détecté.", ln=True)
+            if isinstance(norme, tuple):  # norme sous forme (min, max)
+                conforme = "Oui" if norme[0] <= valeur <= norme[1] else "Non"
+                norme_str = f"{norme[0]} - {norme[1]}"
+            else:
+                conforme = "Oui" if valeur <= norme else "Non"
+                norme_str = f"<= {norme}"
 
-        # Classe IA
-        if "Classe" in row and pd.notnull(row["Classe"]):
-            pdf.ln(4)
-            pdf.set_font("Arial", "B", 12)
-            pdf.cell(0, 8, f"🧠 Classe prédite : {row['Classe']}", ln=True)
+            pdf.cell(60, 8, col, border=1)
+            pdf.cell(30, 8, f"{valeur:.2f}", border=1)
+            pdf.cell(40, 8, norme_str, border=1)
+            pdf.cell(60, 8, conforme, border=1, ln=True)
+
+        pdf.ln(10)
 
     return pdf.output(dest="S").encode("latin-1")
+
 
 
 # ✅ Liste officielle des 23 paramètres utilisés dans l'application
