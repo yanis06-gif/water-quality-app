@@ -638,51 +638,70 @@ elif st.session_state.page == "Visualisation":
         st.rerun()
 
 elif st.session_state.page == "Assistant":
-    st.header("🤖 Assistant IA – Aide & Visualisation des Données")
-    st.markdown("Posez votre question à l’assistant sur la qualité de l’eau, l’analyse ou les visualisations disponibles.")
+    st.header("🤖 Assistant IA – Aide & Explications sur l’application")
+    st.markdown("Posez une question sur l’utilisation de l’application, l’analyse de l’eau, les normes ou les fonctionnalités disponibles.")
 
-    question = st.text_input("💬 Votre question :", placeholder="Ex : Comment visualiser l’évolution du pH ?")
+    question = st.text_input("💬 Votre question :", placeholder="Ex : Comment classifier un prélèvement ?")
 
     if question:
-        # Réponses prédéfinies en fonction de mots-clés détectés
         question_lower = question.lower()
+        
+        # --- Réponses intelligentes à base de mots-clés ---
+        if "prélèvement" in question_lower or "ajouter" in question_lower:
+            st.info("🧪 Pour **ajouter un nouveau prélèvement**, rendez-vous dans le menu **Base de Données**.\nRemplissez les champs obligatoires comme la date, l’heure, le lieu, et les valeurs des paramètres. Cliquez ensuite sur **💾 Enregistrer le prélèvement**.")
 
-        if "graphique" in question_lower or "visualiser" in question_lower or "courbe" in question_lower:
-            st.info("📊 Vous pouvez visualiser l’évolution d’un paramètre dans le menu **Visualisation**.\n\nVoici ce que vous pouvez faire :")
-            st.markdown("""
-            - **Tracer une courbe** de l'évolution d’un paramètre (ex : pH, nitrate, etc.) dans le temps.
-            - **Comparer plusieurs paramètres** ensemble.
-            - **Détecter des anomalies visuelles** (pics de turbidité, baisses du chlore libre, etc.).
-            - **Filtrer les données** par date, localisation ou entreprise pour une analyse ciblée.
-            - **Exporter les visualisations** au format image (via clic droit ou capture).
-            - **Utiliser différents types de graphes** : lignes, barres, nuages de points.
+        elif "classer" in question_lower or "classification" in question_lower:
+            st.info("🧠 Pour **classifier la qualité de l’eau**, allez dans la section **Classification**.\nSaisissez les 23 paramètres, puis cliquez sur **📈 Lancer la classification**. L’algorithme affichera une des 5 classes (Très bonne, Bonne, Moyenne, Mauvaise, Très mauvaise) avec les alertes associées.")
 
-            ℹ️ Conseil : veillez à avoir au moins quelques prélèvements enregistrés dans la **Base de Données** pour que les graphiques s’affichent !
-            """)
+        elif "pollution" in question_lower or "pollu" in question_lower:
+            st.info("⚠️ Pour **détecter le type de pollution**, ouvrez la page **Pollution**.\nEntrez les valeurs des 23 paramètres et cliquez sur **🔎 Détecter la pollution**. L’IA identifiera automatiquement s’il y a une pollution bactérienne, minérale, organique, etc.")
 
-        elif "paramètre" in question_lower:
-            st.info("💡 Tous les paramètres mesurés sont disponibles pour la visualisation.")
-            st.markdown("Voici la **liste complète des 23 paramètres** que vous pouvez analyser :")
-            for p in parametres:
+        elif "norme" in question_lower:
+            st.info("📏 Les **normes algériennes** sont intégrées dans l’application.\nChaque paramètre est comparé à sa norme pour signaler les dépassements et proposer une action : chloration, désinfection, adoucisseur, etc.")
+
+        elif "visualiser" in question_lower or "graphe" in question_lower or "graphique" in question_lower:
+            st.info("📊 Pour **visualiser l’évolution des paramètres**, allez dans **Visualisation**.\nVous pouvez y tracer des courbes dans le temps, voir des histogrammes, ou comparer les valeurs à la norme.")
+
+        elif "export" in question_lower or "excel" in question_lower or "pdf" in question_lower:
+            st.info("📤 Pour **exporter la base de données**, utilisez le menu **Base de Données**.\nVous y trouverez des boutons pour exporter au format CSV ou Excel.")
+
+        elif "vider" in question_lower or "supprimer" in question_lower or "reset" in question_lower:
+            st.info("🗑️ Pour **vider la base de données**, ouvrez la section **Base de Données** et cliquez sur le bouton **❌ Vider la base de données** dans la zone d’expansion prévue.")
+
+        elif "paramètre" in question_lower or "liste" in question_lower:
+            st.markdown("📋 Voici la **liste complète des 23 paramètres** utilisés dans l’application :")
+            for p in [
+                "Total Coliform", "Escherichia Coli", "Faecal Streptococci", "Turbidity", "pH",
+                "Temperature", "Free Chlorine", "Chlorates", "Sulfate", "Magnesium", "Calcium",
+                "Conductivity", "Dry Residue", "Complete Alkaline Title", "Nitrite", "Ammonium",
+                "Phosphate", "Nitrate", "Iron", "Manganese", "Colour", "Smell", "Taste"
+            ]:
                 st.markdown(f"- {p}")
 
-        elif "erreur" in question_lower or "pas de graphique" in question_lower:
-            st.warning("❌ Vérifiez que vous avez bien **enregistré des prélèvements** dans la base de données.\nSans données, aucun graphique ne peut être généré.")
-            st.markdown("📍 Astuce : utilisez la section **Base de Données** pour saisir ou importer vos premiers prélèvements.")
+        elif "erreur" in question_lower or "ne fonctionne pas" in question_lower or "problème" in question_lower:
+            st.warning("❌ Assurez-vous d’avoir bien **enregistré au moins un prélèvement**.\nSinon, les fonctionnalités comme la visualisation ou l’export ne fonctionneront pas correctement.")
+        
+        elif "conseil" in question_lower or "améliorer" in question_lower:
+            st.markdown("""💡 Quelques **bons conseils** pour une bonne qualité de l’eau :
+- Maintenir le **chlore libre entre 0.2 et 0.5 mg/L**.
+- Garder la **turbidité sous 5 NTU** pour une bonne clarté.
+- S’assurer que les **coliformes et E. coli soient à 0**.
+- Éviter les nitrates > 50 mg/L pour prévenir les risques chez les nourrissons.
+- Surveiller **l’odeur, la couleur et le goût** pour détecter les anomalies invisibles.""")
 
-        elif "comparaison" in question_lower:
-            st.markdown("""
-            📈 Vous pouvez comparer plusieurs paramètres dans la section **Visualisation** :
-            - Sélectionnez **deux ou plusieurs paramètres** dans le filtre.
-            - Un graphique multi-trace apparaîtra pour comparer les tendances.
-            - Cela permet de repérer des **corrélations**, comme entre nitrate et conductivité.
-            """)
+        elif "classe" in question_lower or "interprétation" in question_lower:
+            st.markdown("""🧠 **Interprétation des classes prédictives de qualité :**
+- **Très bonne** : Tous les paramètres sont conformes.
+- **Bonne** : Légères anomalies sans danger.
+- **Moyenne** : Traitement recommandé avant consommation.
+- **Mauvaise** : Non potable sans traitement.
+- **Très mauvaise** : Source très contaminée.""")
 
         else:
-            st.info("🤖 Je suis encore en cours d’apprentissage. Essayez une question sur la visualisation ou sur les paramètres !")
-            st.markdown("🔍 Exemples de questions :\n- Comment afficher le graphique du pH ?\n- Peut-on comparer les paramètres ?\n- Pourquoi je ne vois pas de graphique ?")
+            st.info("🤖 Je suis encore en cours d’apprentissage.\nEssayez une question sur les prélèvements, la classification, les normes ou les visualisations.")
+            st.markdown("📍 *Exemples de questions :*\n- Comment classifier un prélèvement ?\n- Que signifie la classe « Mauvaise » ?\n- Comment exporter mes résultats ?")
 
-    # Retour
+    # Bouton retour
     st.markdown("---")
     if st.button("🔙 Retour au menu principal"):
         st.session_state.page = "accueil_interne"
