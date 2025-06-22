@@ -217,7 +217,17 @@ if st.session_state.page == "Base de données":
         st.warning("⚠️ Aucune donnée enregistrée.")
 
     # ... (tout le bloc de gestion de base de données)
-    
+        # 🔻 Réinitialisation / Vidage complet de la base de données
+    with st.expander("🗑️ Vider complètement la base de données"):
+        st.warning("⚠️ Cette action supprimera **toutes** les données enregistrées.")
+        if st.button("❌ Vider la base de données"):
+            st.session_state.df_prelèvements = pd.DataFrame()
+            if os.path.exists("prelevements_sauvegarde.pkl"):
+                os.remove("prelevements_sauvegarde.pkl")
+            st.success("🧹 Base de données vidée avec succès.")
+            st.rerun()
+
+
     # Bouton retour à ajouter ici :
     st.markdown("---")
     if st.button("🔙 Retour au menu principal"):
