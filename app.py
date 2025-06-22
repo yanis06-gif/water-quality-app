@@ -237,7 +237,7 @@ if st.session_state.page == "Base de données":
         if st.button("💾 Enregistrer le prélèvement"):
             new_row = {
                 "Date": date, "Heure": heure, "Localisation": localisation,
-                "Entreprise": entreprise, "Analyste": analyste, "Code": code
+                "Entreprise": entreprise, "Préleveur": préleveur, "Analyste": analyste, "Code": code
             }
             new_row.update(resultats)
             st.session_state.df_prelèvements = pd.concat([
