@@ -26,6 +26,7 @@ def generer_rapport_prelevements(df, normes):
         pdf.cell(0, 10, f"Date : {row.get('Date', '')}  Heure : {row.get('Heure', '')}", ln=True)
         pdf.cell(0, 10, f"Localisation : {row.get('Localisation', '')}", ln=True)
         pdf.cell(0, 10, f"Entreprise : {row.get('Entreprise', '')}", ln=True)
+        pdf.cell(0, 10, f"Préleveur : {row.get('Préleveur', '')}", ln=True)
         pdf.cell(0, 10, f"Analyste : {row.get('Analyste', '')}", ln=True)
         pdf.ln(4)
 
