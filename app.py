@@ -677,7 +677,7 @@ elif st.session_state.page == "Assistant":
                 "Phosphate", "Nitrate", "Iron", "Manganese", "Colour", "Smell", "Taste"
             ]:
                 st.markdown(f"- {p}")
-                elif "chlore" in question_lower:
+        elif "chlore" in question_lower:
             st.info("💧 Le **chlore libre** doit être maintenu entre **0.2 et 0.5 mg/L** pour garantir une désinfection efficace.\nEn dessous, il y a un risque microbiologique. Au-dessus, il peut y avoir un goût désagréable ou des effets secondaires.")
 
         elif "ph" in question_lower:
