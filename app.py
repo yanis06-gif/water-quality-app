@@ -1,4 +1,5 @@
 import streamlit as st
+st.write("PAGE ACTIVE :", st.session_state.page)
 
 st.set_page_config(page_title="Test HTML", layout="centered")
 
