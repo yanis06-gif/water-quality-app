@@ -670,8 +670,29 @@ elif st.session_state.page == "Visualisation":
 
         # Sélection des options
         st.subheader("📌 Options de sélection")
-        params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code"]]
+        params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise","Préleveur", "Analyste", "Code"]]
         param_choisi = st.selectbox("🔍 Choisir un paramètre à visualiser", options=params_disponibles)
+        st.markdown("### ⏱️ Filtrage temporel")
+
+        # Options de durée
+        durees = {
+            "1 heure": pd.Timedelta(hours=1),
+            "12 heures": pd.Timedelta(hours=12),
+            "24 heures": pd.Timedelta(days=1),
+            "3 jours": pd.Timedelta(days=3),
+            "1 semaine": pd.Timedelta(weeks=1),
+            "1 mois": pd.Timedelta(days=30),
+            "Tout afficher": None
+        }
+        choix_duree = st.selectbox("⏳ Sélectionnez la durée à afficher :", list(durees.keys()))
+
+        # Conversion Date + Heure si séparées
+        df["Datetime"] = pd.to_datetime(df["Date"].astype(str) + " " + df["Heure"].astype(str))
+
+        # Filtrage selon la durée choisie
+        if durees[choix_duree] is not None:
+            temps_limite = df["Datetime"].max() - durees[choix_duree]
+            df = df[df["Datetime"] >= temps_limite]
 
         st.markdown("### 📈 Évolution du paramètre sélectionné")
         fig1 = px.line(df, x="Date", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
