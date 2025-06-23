@@ -668,45 +668,47 @@ elif st.session_state.page == "Visualisation":
     if "df_prelèvements" in st.session_state and not st.session_state.df_prelèvements.empty:
         df = st.session_state.df_prelèvements
 
-        # 📌 Options de sélection
-        st.subheader("📌 Options de sélection")
-        params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code"]]
-        param_choisi = st.selectbox("🔍 Choisir un paramètre à visualiser", options=params_disponibles)
+        if "df_prelèvements" in st.session_state and not st.session_state.df_prelèvements.empty:
+            df = st.session_state.df_prelèvements.copy()
 
-        # ⏳ Options de durée
-        durees = {
-            "1 heure": pd.Timedelta(hours=1),
-            "12 heures": pd.Timedelta(hours=12),
-            "24 heures": pd.Timedelta(days=1),
-            "3 jours": pd.Timedelta(days=3),
-            "1 semaine": pd.Timedelta(weeks=1),
-            "1 mois": pd.Timedelta(days=30),
-            "Tout afficher": None
-        }
-        choix_duree = st.selectbox("⏳ Sélectionnez la durée à afficher :", list(durees.keys()))
+            st.subheader("📌 Options de sélection")
+            params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code"]]
+            param_choisi = st.selectbox("🔍 Choisir un paramètre à visualiser", options=params_disponibles)
 
-        # 🕓 Conversion Date + Heure
-        df["Datetime"] = pd.to_datetime(df["Date"].astype(str) + " " + df["Heure"].astype(str))
+            # Ajout de la colonne Datetime
+            df["Datetime"] = pd.to_datetime(df["Date"].astype(str) + " " + df["Heure"].astype(str))
+            df = df.sort_values("Datetime")
 
-        # 🧼 Tri croissant par temps
-        df = df.sort_values("Datetime")
+            # Sélecteur de durée
+            durees = {
+                "1 heure": pd.Timedelta(hours=1),
+                "12 heures": pd.Timedelta(hours=12),
+                "24 heures": pd.Timedelta(days=1),
+                "3 jours": pd.Timedelta(days=3),
+                "1 semaine": pd.Timedelta(weeks=1),
+                "1 mois": pd.Timedelta(days=30),
+                "Tout afficher": None
+            }
+            choix_duree = st.selectbox("⏳ Sélectionnez la durée :", list(durees.keys()))
 
-        # ⛔️ Filtrage si durée choisie ≠ Tout
-        if durees[choix_duree] is not None:
-            temps_limite = df["Datetime"].max() - durees[choix_duree]
-            df_filtré = df[df["Datetime"] >= temps_limite]
+            # Application du filtre
+            if durees[choix_duree] is not None:
+                limite = df["Datetime"].max() - durees[choix_duree]
+                df = df[df["Datetime"] >= limite]
+
+            # Graphique 1 : évolution
+            st.markdown("### 📈 Évolution du paramètre sélectionné")
+            fig1 = px.line(df, x="Datetime", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
+            st.plotly_chart(fig1, use_container_width=True)
+
+            # Graphique 2 : histogramme
+            st.markdown("### 📊 Histogramme")
+            fig2 = px.histogram(df, x=param_choisi, nbins=30, title=f"Distribution de {param_choisi}")
+            st.plotly_chart(fig2, use_container_width=True)
+
         else:
-            df_filtré = df.copy()
+            st.warning("⚠️ Aucune donnée enregistrée.")
 
-        # 📈 Graphique d’évolution
-        st.markdown("### 📈 Évolution du paramètre sélectionné")
-        fig1 = px.line(df_filtré, x="Datetime", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
-        st.plotly_chart(fig1, use_container_width=True)
-
-        # 📊 Histogramme
-        st.markdown("### 📊 Histogramme")
-        fig2 = px.histogram(df_filtré, x=param_choisi, nbins=30, title=f"Distribution de {param_choisi}")
-        st.plotly_chart(fig2, use_container_width=True)
        
         st.markdown("### 📉 Comparaison avec la norme")
         normes_simplifiees = {
