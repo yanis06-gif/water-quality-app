@@ -695,8 +695,9 @@ elif st.session_state.page == "Visualisation":
             df = df[df["Datetime"] >= temps_limite]
 
         st.markdown("### 📈 Évolution du paramètre sélectionné")
-        fig1 = px.line(df, x="Date", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
+        fig1 = px.line(df, x="Datetime", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
         st.plotly_chart(fig1, use_container_width=True)
+
 
         st.markdown("### 📊 Histogramme")
         fig2 = px.histogram(df, x=param_choisi, nbins=30, title=f"Distribution de {param_choisi}")
