@@ -118,22 +118,22 @@ if st.session_state.page == "Accueil":
             <p class="accueil-subtitle">Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie</p>
 
             <div class="accueil-description">
-                <b>🎓 Initiateurs :</b><br>
+                <p><b>🎓 Initiateurs :</b><br>
                 👨‍🎓 <b>Yanis FETOUH</b> – Étudiant chercheur<br>
-                👨‍🎓 <b>Louisa Lysa AYAD</b> – Étudiant chercheur<br><br>
+                👩‍🎓 <b>Louisa Lysa AYAD</b> – Étudiante chercheuse</p>
 
-                <b>🧑‍🏫 Encadrement :</b><br>
+                <p><b>🧑‍🏫 Encadrement :</b><br>
                 👩‍🏫 <b>BOUCHRAKI</b> – Promotrice<br>
-                👨‍🏫 <b>[Nom du Co-promoteur]</b> – Co-promoteur<br><br>
+                👨‍🏫 <b>[Nom du Co-promoteur]</b> – Co-promoteur</p>
 
-                <b>🤝 En collaboration avec :</b><br>
-                🔬 <b>Laboratoire de l’Algérienne des Eaux</b><br><br>
+                <p><b>🤝 En collaboration avec :</b><br>
+                🔬 <b>Laboratoire de l’Algérienne des Eaux</b></p>
 
-                <b>🏛️ Faculté de Technologie</b> – Département d’Hydraulique<br>
-                <b>Université Abderrahmane Mira de Béjaïa</b><br><br>
+                <p><b>🏛️ Faculté de Technologie</b> – Département d’Hydraulique<br>
+                <b>Université Abderrahmane Mira de Béjaïa</b></p>
 
-                Ce projet s’inscrit dans une dynamique de <b>recherche scientifique appliquée</b>, 
-                visant à contribuer à l’amélioration de la <b>santé publique</b> et de la <b>gestion des ressources en eau</b> en Algérie.
+                <p>Ce projet s’inscrit dans une dynamique de <b>recherche scientifique appliquée</b>, 
+                visant à contribuer à l’amélioration de la <b>santé publique</b> et de la <b>gestion des ressources en eau</b> en Algérie.</p>
             </div>
 
             <div class="accueil-footer">
