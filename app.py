@@ -137,6 +137,11 @@ if st.session_state.page == "accueil_interne":
     st.title("📚 Menu principal")
     st.markdown("Choisissez une fonctionnalité ci-dessous :")
 
+    if st.button("📘 Présentation de l’application"):
+        st.session_state.page = "Présentation"
+        st.rerun()
+
+
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -168,10 +173,58 @@ if st.session_state.page == "accueil_interne":
   
 
 # Afficher la bonne section selon la page
+if st.session_state.page == "Présentation":
+    st.title("📘 Présentation de Water Quality App")
+
+    # Ajout de l’image (assure-toi que "eau.jpg" existe dans le dossier de ton app)
+    st.image("eau.jpg", use_column_width=True)
+
+    st.markdown("""
+    ---
+    ### 💧 Description générale
+    Water Quality App est une application professionnelle conçue pour analyser et surveiller la qualité de l’eau potable en utilisant des techniques d’intelligence artificielle.
+
+    ---
+    ### ⚙️ Fonctionnalités principales
+    - 📥 Ajout de prélèvements manuellement ou via fichier Excel
+    - 🔍 Prédiction de paramètres manquants avec IA (Random Forest)
+    - 🧠 Classification intelligente de la qualité (NORME, EXCÈS CHLORE…)
+    - ☣️ Détection automatique du type de pollution
+    - 📊 Visualisations interactives
+    - 📤 Export PDF et Excel
+    - 🤖 Assistant IA intégré pour guider les utilisateurs
+
+    ---
+    ### 🧪 Paramètres analysés
+    23 paramètres selon les normes algériennes (pH, Chlore, Nitrate, Coliformes, etc.)
+
+    ---
+    ### 🧠 Technologies utilisées
+    Python, Pandas, Scikit-learn, Plotly, Streamlit
+
+    ---
+    ### 👥 Public cible
+    - Laboratoires de contrôle de qualité
+    - Services d’eau potable
+    - Universitaires
+    - Institutions de santé publique
+
+    ---
+    ### 🌐 Hébergement
+    Application hébergée via GitHub + Render ou OVH, avec mises à jour automatiques pour tous les utilisateurs.
+
+    ---
+    """, unsafe_allow_html=True)
+
+    # Bouton retour
+    if st.button("🔙 Retour au menu principal"):
+        st.session_state.page = "accueil_interne"
+        st.rerun()
+    pass
 #################
 # BASE DE DONNEE
 #################
-if st.session_state.page == "Base de données":
+elif st.session_state.page == "Base de données":
 
     import pandas as pd
     from datetime import datetime
@@ -672,7 +725,7 @@ elif st.session_state.page == "Visualisation":
             df = st.session_state.df_prelèvements.copy()
 
             st.subheader("📌 Options de sélection")
-            params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code"]]
+            params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise","Préleveur", "Analyste", "Code"]]
             param_choisi = st.selectbox("🔍 Choisir un paramètre à visualiser", options=params_disponibles)
 
             # Ajout de la colonne Datetime
