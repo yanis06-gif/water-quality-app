@@ -80,59 +80,60 @@ if st.session_state.page == "Accueil":
         <style>
             .accueil-container {
                 text-align: center;
-                padding: 2rem;
-                background: linear-gradient(135deg, #e6f7ff, #f0faff);
+                padding: 3rem;
+                background: linear-gradient(145deg, #e0f7fa, #ffffff);
                 border-radius: 20px;
-                box-shadow: 0 6px 20px rgba(0, 123, 255, 0.2);
-                font-family: 'Segoe UI', sans-serif;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+                margin-top: 2rem;
             }
             .accueil-title {
                 font-size: 3em;
                 font-weight: bold;
-                color: #0077cc;
+                color: #006699;
+                margin-bottom: 0.5em;
             }
             .accueil-subtitle {
-                font-size: 1.7em;
-                color: #1a1a1a;
-                margin-bottom: 1rem;
+                font-size: 1.4em;
+                color: #333;
+                margin-bottom: 1.5em;
             }
             .accueil-description {
                 font-size: 1.1em;
-                margin-top: 1.5rem;
                 color: #444;
-                line-height: 1.8;
-                max-width: 750px;
-                margin-left: auto;
-                margin-right: auto;
+                line-height: 1.7;
+                max-width: 800px;
+                margin: auto;
+                text-align: left;
             }
             .accueil-footer {
-                margin-top: 2rem;
+                margin-top: 2.5rem;
                 color: #666;
+                font-style: italic;
                 font-size: 0.95em;
             }
         </style>
 
         <div class="accueil-container">
             <h1 class="accueil-title">💧 Water Quality App</h1>
-            <p class="accueil-subtitle">Application intelligente pour l’analyse de la qualité de l’eau potable</p>
+            <p class="accueil-subtitle">Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie</p>
 
             <div class="accueil-description">
-                <b>Initiateurs :</b><br>
+                <b>🎓 Initiateurs :</b><br>
                 👨‍🎓 <b>Yanis FETHI</b> – Étudiant chercheur<br>
                 👨‍🎓 <b>[Nom Étudiant 2]</b> – Étudiant chercheur<br><br>
 
-                <b>Encadrement :</b><br>
-                👩‍🏫 <b>[Nom Promotrice]</b> – Promotrice<br>
-                👨‍🏫 <b>[Nom Co-promoteur]</b> – Co-promoteur<br><br>
+                <b>🧑‍🏫 Encadrement :</b><br>
+                👩‍🏫 <b>[Nom de la Promotrice]</b> – Promotrice<br>
+                👨‍🏫 <b>[Nom du Co-promoteur]</b> – Co-promoteur<br><br>
 
-                <b>En collaboration avec :</b><br>
+                <b>🤝 En collaboration avec :</b><br>
                 🔬 <b>Laboratoire de l’Algérienne des Eaux</b><br><br>
 
-                <b>Faculté de Technologie</b> – Département d’Hydraulique<br>
+                <b>🏛️ Faculté de Technologie</b> – Département d’Hydraulique<br>
                 <b>Université Abderrahmane Mira de Béjaïa</b><br><br>
 
                 Ce projet s’inscrit dans une dynamique de <b>recherche scientifique appliquée</b>, 
-                visant à contribuer à l’amélioration de la santé publique et de la gestion des ressources en eau en Algérie.
+                visant à contribuer à l’amélioration de la <b>santé publique</b> et de la <b>gestion des ressources en eau</b> en Algérie.
             </div>
 
             <div class="accueil-footer">
@@ -140,6 +141,7 @@ if st.session_state.page == "Accueil":
             </div>
         </div>
     """, unsafe_allow_html=True)
+
 
     # Action bouton → entrée dans l'application
     if st.button("➡️ Entrer dans le menu principal"):
