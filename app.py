@@ -668,13 +668,12 @@ elif st.session_state.page == "Visualisation":
     if "df_prelèvements" in st.session_state and not st.session_state.df_prelèvements.empty:
         df = st.session_state.df_prelèvements
 
-        # Sélection des options
+        # 📌 Options de sélection
         st.subheader("📌 Options de sélection")
-        params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise","Préleveur", "Analyste", "Code"]]
+        params_disponibles = [col for col in df.columns if col not in ["Date", "Heure", "Localisation", "Entreprise", "Analyste", "Code"]]
         param_choisi = st.selectbox("🔍 Choisir un paramètre à visualiser", options=params_disponibles)
-        st.markdown("### ⏱️ Filtrage temporel")
 
-        # Options de durée
+        # ⏳ Options de durée
         durees = {
             "1 heure": pd.Timedelta(hours=1),
             "12 heures": pd.Timedelta(hours=12),
@@ -686,23 +685,29 @@ elif st.session_state.page == "Visualisation":
         }
         choix_duree = st.selectbox("⏳ Sélectionnez la durée à afficher :", list(durees.keys()))
 
-        # Conversion Date + Heure si séparées
+        # 🕓 Conversion Date + Heure
         df["Datetime"] = pd.to_datetime(df["Date"].astype(str) + " " + df["Heure"].astype(str))
 
-        # Filtrage selon la durée choisie
+        # 🧼 Tri croissant par temps
+        df = df.sort_values("Datetime")
+
+        # ⛔️ Filtrage si durée choisie ≠ Tout
         if durees[choix_duree] is not None:
             temps_limite = df["Datetime"].max() - durees[choix_duree]
-            df = df[df["Datetime"] >= temps_limite]
+            df_filtré = df[df["Datetime"] >= temps_limite]
+        else:
+            df_filtré = df.copy()
 
+        # 📈 Graphique d’évolution
         st.markdown("### 📈 Évolution du paramètre sélectionné")
-        fig1 = px.line(df, x="Datetime", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
+        fig1 = px.line(df_filtré, x="Datetime", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
         st.plotly_chart(fig1, use_container_width=True)
 
-
+        # 📊 Histogramme
         st.markdown("### 📊 Histogramme")
-        fig2 = px.histogram(df, x=param_choisi, nbins=30, title=f"Distribution de {param_choisi}")
+        fig2 = px.histogram(df_filtré, x=param_choisi, nbins=30, title=f"Distribution de {param_choisi}")
         st.plotly_chart(fig2, use_container_width=True)
-
+       
         st.markdown("### 📉 Comparaison avec la norme")
         normes_simplifiees = {
             "Total Coliform": 0,
