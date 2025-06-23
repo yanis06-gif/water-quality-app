@@ -45,7 +45,7 @@ if st.session_state.page == "Accueil":
     st.markdown("## 💧 Water Quality App")
     st.markdown("### Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie")
 
-    st.info(\"\"\"
+    st.info(\"""
     **🎓 Initiateurs :**  
    👨‍🎓 Yanis FETOUH – Étudiant chercheur  
    👩‍🎓 Louisa Lysa AYAD – Étudiante chercheuse  
@@ -61,7 +61,7 @@ if st.session_state.page == "Accueil":
     Université Abderrahmane Mira de Béjaïa  
 
     Ce projet s’inscrit dans une dynamique de **recherche scientifique appliquée**, visant à contribuer à l’amélioration de la **santé publique**.
-    \"\"\")
+    """)
 
     st.markdown("*Version 1.0 – Propulsée par la science, l’innovation et la passion pour l’environnement 💙*")
 
