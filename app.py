@@ -76,71 +76,28 @@ parametres = [
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 if st.session_state.page == "Accueil":
-    st.markdown("""
-        <style>
-            .accueil-container {
-                background: linear-gradient(135deg, #e0f7ff, #ffffff);
-                border-radius: 15px;
-                padding: 2rem;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                font-family: 'Segoe UI', sans-serif;
-                text-align: center;
-            }
-            .titre-app {
-                font-size: 2.5em;
-                font-weight: bold;
-                color: #006699;
-                margin-bottom: 0.5em;
-            }
-            .sous-titre-app {
-                font-size: 1.4em;
-                color: #444;
-                margin-bottom: 1.5em;
-            }
-            .section-texte {
-                font-size: 1.05em;
-                color: #333;
-                line-height: 1.7em;
-                text-align: left;
-                max-width: 700px;
-                margin: 0 auto 2rem auto;
-            }
-            .footer-app {
-                margin-top: 2rem;
-                font-size: 0.95em;
-                color: #666;
-                font-style: italic;
-            }
-        </style>
+    st.markdown("## 💧 Water Quality App")
+    st.markdown("### Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie")
 
-        <div class="accueil-container">
-            <div class="titre-app">💧 Water Quality App</div>
-            <div class="sous-titre-app">Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie</div>
+    st.info("""
+                            **🎓 Initiateurs :**  
+   👨‍🎓 Yanis FETOUH – Étudiant chercheur  
+   👩‍🎓 Louisa Lysa AYAD – Étudiante chercheuse  
 
-            <div class="section-texte">
-                <strong>🎓 Initiateurs :</strong><br>
-                👨‍🎓 <strong>Yanis FETOUH</strong> – Étudiant chercheur<br>
-                👩‍🎓 <strong>Louisa Lysa AYAD</strong> – Étudiante chercheuse<br><br>
+    **🧑‍🏫 Encadrement :**  
+    👩‍🏫 F.BOUCHRAKI – Promotrice  
+    👨‍🏫 S.HAMCHAOUI – Co-promoteur  
 
-                <strong>🧑‍🏫 Encadrement :</strong><br>
-                👩‍🏫 <strong>F.BOUCHRAKI</strong> – Promotrice<br>
-                👨‍🏫 <strong>S.HAMCHAOUI</strong> – Co-promoteur<br><br>
+    **🤝 En collaboration avec :**  
+    🔬 Laboratoire de l’Algérienne des Eaux  
 
-                <strong>🤝 En collaboration avec :</strong><br>
-                🔬 <strong>Laboratoire de l’Algérienne des Eaux</strong><br><br>
+    🏛️ Faculté de Technologie – Département d’Hydraulique  
+    Université Abderrahmane Mira de Béjaïa  
 
-                🏛️ <strong>Faculté de Technologie – Département d’Hydraulique</strong><br>
-                <strong>Université Abderrahmane Mira de Béjaïa</strong><br><br>
+    Ce projet s’inscrit dans une dynamique de **recherche scientifique appliquée**, visant à contribuer à l’amélioration de la **santé publique**.
+    """)
 
-                Ce projet s’inscrit dans une dynamique de <strong>recherche scientifique appliquée</strong>, 
-                visant à contribuer à l’amélioration de la <strong>santé publique</strong> et à la gestion durable de l’eau potable en Algérie.
-            </div>
-
-            <div class="footer-app">
-                Version 1.0 – Propulsée par la science, l’innovation et la passion pour l’environnement 💙
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown("*Version 1.0 – Propulsée par la science, l’innovation et la passion pour l’environnement 💙*")
 
     # Action bouton → entrée dans l'application
     if st.button("➡️ Entrer dans le menu principal"):
