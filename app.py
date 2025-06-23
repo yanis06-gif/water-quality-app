@@ -10,9 +10,6 @@ import plotly.express as px
 
 from fpdf import FPDF
 from io import BytesIO
-# ✅ Initialisation de la page active
-if "page" not in st.session_state:
-    st.session_state.page = "Accueil"
 
 def generer_rapport_prelevements(df, normes):
     pdf = FPDF()
@@ -75,7 +72,9 @@ parametres = [
     "Nitrite", "Ammonium", "Phosphate", "Nitrate", "Iron", "Manganese",
     "Colour", "Smell", "Taste"
 ]
-
+# ✅ Initialisation de la page active
+if "page" not in st.session_state:
+    st.session_state.page = "Accueil"
 if st.session_state.page == "Accueil":
     st.markdown("""
         <style>
