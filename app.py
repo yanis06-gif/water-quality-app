@@ -119,11 +119,11 @@ if st.session_state.page == "Accueil":
 
             <div class="accueil-description">
                 <b>🎓 Initiateurs :</b><br>
-                👨‍🎓 <b>Yanis FETHI</b> – Étudiant chercheur<br>
-                👨‍🎓 <b>[Nom Étudiant 2]</b> – Étudiant chercheur<br><br>
+                👨‍🎓 <b>Yanis FETOUH</b> – Étudiant chercheur<br>
+                👨‍🎓 <b>Louisa Lysa AYAD</b> – Étudiant chercheur<br><br>
 
                 <b>🧑‍🏫 Encadrement :</b><br>
-                👩‍🏫 <b>[Nom de la Promotrice]</b> – Promotrice<br>
+                👩‍🏫 <b>BOUCHRAKI</b> – Promotrice<br>
                 👨‍🏫 <b>[Nom du Co-promoteur]</b> – Co-promoteur<br><br>
 
                 <b>🤝 En collaboration avec :</b><br>
