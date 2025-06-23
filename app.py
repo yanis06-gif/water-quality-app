@@ -123,8 +123,8 @@ if st.session_state.page == "Accueil":
                 👩‍🎓 <strong>Louisa Lysa AYAD</strong> – Étudiante chercheuse<br><br>
 
                 <strong>🧑‍🏫 Encadrement :</strong><br>
-                👩‍🏫 <strong>BOUCHRAKI</strong> – Promotrice<br>
-                👨‍🏫 <strong>[Nom du Co-promoteur]</strong> – Co-promoteur<br><br>
+                👩‍🏫 <strong>F.BOUCHRAKI</strong> – Promotrice<br>
+                👨‍🏫 <strong>S.HAMCHAOUI</strong> – Co-promoteur<br><br>
 
                 <strong>🤝 En collaboration avec :</strong><br>
                 🔬 <strong>Laboratoire de l’Algérienne des Eaux</strong><br><br>
