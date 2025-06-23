@@ -74,18 +74,16 @@ parametres = [
 ]
 
 
-# ✅ Initialisation de la page active dans la session
-if "page" not in st.session_state:
-    st.session_state.page = "Accueil"
 if st.session_state.page == "Accueil":
     st.markdown("""
         <style>
             .accueil-container {
                 text-align: center;
                 padding: 2rem;
-                background: linear-gradient(145deg, #d6f0ff, #ffffff);
-                border-radius: 15px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                background: linear-gradient(135deg, #e6f7ff, #f0faff);
+                border-radius: 20px;
+                box-shadow: 0 6px 20px rgba(0, 123, 255, 0.2);
+                font-family: 'Segoe UI', sans-serif;
             }
             .accueil-title {
                 font-size: 3em;
@@ -93,37 +91,51 @@ if st.session_state.page == "Accueil":
                 color: #0077cc;
             }
             .accueil-subtitle {
-                font-size: 1.5em;
-                color: #333;
+                font-size: 1.7em;
+                color: #1a1a1a;
+                margin-bottom: 1rem;
             }
             .accueil-description {
                 font-size: 1.1em;
                 margin-top: 1.5rem;
                 color: #444;
-                line-height: 1.6;
+                line-height: 1.8;
+                max-width: 750px;
+                margin-left: auto;
+                margin-right: auto;
             }
             .accueil-footer {
                 margin-top: 2rem;
-                color: #888;
+                color: #666;
+                font-size: 0.95em;
             }
         </style>
 
         <div class="accueil-container">
             <h1 class="accueil-title">💧 Water Quality App</h1>
-            <p class="accueil-subtitle">Analyse intelligente de la qualité de l'eau potable en Algérie</p>
+            <p class="accueil-subtitle">Application intelligente pour l’analyse de la qualité de l’eau potable</p>
+
             <div class="accueil-description">
-                Bienvenue sur l'application dédiée à la surveillance et à l'amélioration de la qualité de l’eau potable.<br><br>
-                Grâce à cette application, vous pouvez :
-                <ul style="text-align: left; max-width: 600px; margin: auto;">
-                    <li>🔍 Classer la qualité de l’eau selon les normes algériennes</li>
-                    <li>📊 Gérer une base de données complète de prélèvements</li>
-                    <li>🧠 Prédire les paramètres manquants avec IA</li>
-                    <li>🚨 Détecter automatiquement le type de pollution</li>
-                    <li>📁 Exporter vos résultats en PDF ou Excel</li>
-                </ul>
+                <b>Initiateurs :</b><br>
+                👨‍🎓 <b>Yanis FETHI</b> – Étudiant chercheur<br>
+                👨‍🎓 <b>[Nom Étudiant 2]</b> – Étudiant chercheur<br><br>
+
+                <b>Encadrement :</b><br>
+                👩‍🏫 <b>[Nom Promotrice]</b> – Promotrice<br>
+                👨‍🏫 <b>[Nom Co-promoteur]</b> – Co-promoteur<br><br>
+
+                <b>En collaboration avec :</b><br>
+                🔬 <b>Laboratoire de l’Algérienne des Eaux</b><br><br>
+
+                <b>Faculté de Technologie</b> – Département d’Hydraulique<br>
+                <b>Université Abderrahmane Mira de Béjaïa</b><br><br>
+
+                Ce projet s’inscrit dans une dynamique de <b>recherche scientifique appliquée</b>, 
+                visant à contribuer à l’amélioration de la santé publique et de la gestion des ressources en eau en Algérie.
             </div>
+
             <div class="accueil-footer">
-                Version 1.0 – Développé avec ❤️ pour l’environnement et la santé publique
+                Version 1.0 – Propulsée par la science, l’innovation et la passion pour l’environnement 💙
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -137,7 +149,7 @@ if st.session_state.page == "accueil_interne":
     st.title("📚 Menu principal")
     st.markdown("Choisissez une fonctionnalité ci-dessous :")
 
-    if st.button("📘 Présentation de l’application"):
+    if st.button("1-📘 Présentation de l’application"):
         st.session_state.page = "Présentation"
         st.rerun()
 
@@ -145,24 +157,24 @@ if st.session_state.page == "accueil_interne":
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("📋 Base de données"):
+        if st.button("2-📋 Base de données"):
             st.session_state.page = "Base de données"
             st.rerun()
-        if st.button("🔍 Prédiction"):
+        if st.button("3-🔍 Prédiction"):
             st.session_state.page = "Prédiction"
             st.rerun()
     with col2:
-        if st.button("🧠 Classification"):
+        if st.button("4-🧠 Classification"):
             st.session_state.page = "Classification"
             st.rerun()
-        if st.button("☣️ Détection Pollution"):
+        if st.button("5-☣️ Détection Pollution"):
             st.session_state.page = "Pollution"
             st.rerun()
     with col3:
-        if st.button("📊 Visualisation"):
+        if st.button("6-📊 Visualisation"):
             st.session_state.page = "Visualisation"
             st.rerun()
-        if st.button("💬 Assistant IA"):
+        if st.button("7-💬 Assistant IA"):
             st.session_state.page = "Assistant"
             st.rerun()
     # 🔚 Bouton de retour à l’accueil (page d’introduction)
