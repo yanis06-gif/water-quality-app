@@ -45,7 +45,7 @@ if st.session_state.page == "Accueil":
     st.markdown("## 💧 Water Quality App")
     st.markdown("### Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie")
 
-    st.info(\"""
+    st.info("""
     **🎓 Initiateurs :**  
    👨‍🎓 Yanis FETOUH – Étudiant chercheur  
    👩‍🎓 Louisa Lysa AYAD – Étudiante chercheuse  
