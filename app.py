@@ -691,27 +691,24 @@ elif st.session_state.page == "Visualisation":
             }
             choix_duree = st.selectbox("⏳ Sélectionnez la durée :", list(durees.keys()))
 
-            # Application du filtre
+            # Application du filtre de temps
             if durees[choix_duree] is not None:
                 limite = df["Datetime"].max() - durees[choix_duree]
                 df = df[df["Datetime"] >= limite]
 
-            # Graphique 1 : évolution
+            # === Évolution dans le temps
             st.markdown("### 📈 Évolution du paramètre sélectionné")
             fig1 = px.line(df, x="Datetime", y=param_choisi, title=f"Évolution de {param_choisi}", markers=True)
             st.plotly_chart(fig1, use_container_width=True)
 
-            # Graphique 2 : histogramme
+            # === Histogramme
             st.markdown("### 📊 Histogramme")
             fig2 = px.histogram(df, x=param_choisi, nbins=30, title=f"Distribution de {param_choisi}")
             st.plotly_chart(fig2, use_container_width=True)
 
-        else:
-            st.warning("⚠️ Aucune donnée enregistrée.")
-
-       
-        st.markdown("### 📉 Comparaison avec la norme")
-        normes_simplifiees = {
+            # === Comparaison avec la norme
+            st.markdown("### 📉 Comparaison avec la norme")
+            normes_simplifiees = {
             "Total Coliform": 0,
             "Escherichia Coli": 0,
             "Faecal Streptococci": 0,
@@ -735,21 +732,24 @@ elif st.session_state.page == "Visualisation":
             "Colour": 0,
             "Smell": 0,
             "Taste": 0
-        }
-        if param_choisi in normes_simplifiees:
-            st.info("Ligne rouge = limite de la norme algérienne")
-            fig3 = px.line(df, x="Date", y=param_choisi, title=f"{param_choisi} avec Norme")
-            if isinstance(normes_simplifiees[param_choisi], tuple):
-                min_, max_ = normes_simplifiees[param_choisi]
-                fig3.add_hline(y=min_, line_color="red", line_dash="dash")
-                fig3.add_hline(y=max_, line_color="red", line_dash="dash")
-            else:
-                fig3.add_hline(y=normes_simplifiees[param_choisi], line_color="red", line_dash="dash")
-            st.plotly_chart(fig3, use_container_width=True)
+            }
 
-    else:
-        st.warning("⚠️ Aucune donnée enregistrée. Veuillez d’abord ajouter des prélèvements dans la base de données.")
+            if param_choisi in normes_simplifiees:
+                st.info("🔴 Ligne rouge = limite de la norme algérienne")
+                fig3 = px.line(df, x="Datetime", y=param_choisi, title=f"{param_choisi} avec Norme", markers=True)
 
+                if isinstance(normes_simplifiees[param_choisi], tuple):
+                    min_, max_ = normes_simplifiees[param_choisi]
+                    fig3.add_hline(y=min_, line_color="red", line_dash="dash")
+                    fig3.add_hline(y=max_, line_color="red", line_dash="dash")
+                else:
+                    fig3.add_hline(y=normes_simplifiees[param_choisi], line_color="red", line_dash="dash")
+
+                st.plotly_chart(fig3, use_container_width=True)
+
+        else:
+            st.warning("⚠️ Aucune donnée enregistrée.")
+        
     # Bouton retour
     st.markdown("---")
     if st.button("🔙 Retour au menu principal"):
