@@ -42,74 +42,29 @@ st.session_state.page = selected_page
 # Page : Accueil
 # -----------------------------
 if st.session_state.page == "Accueil":
-    st.markdown(
-        r"""
-        <style>
-            .accueil-container {
-                text-align: center;
-                padding: 3rem;
-                background: linear-gradient(145deg, #e0f7fa, #ffffff);
-                border-radius: 20px;
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-                margin-top: 2rem;
-            }
-            .accueil-title {
-                font-size: 3em;
-                font-weight: bold;
-                color: #006699;
-                margin-bottom: 0.5em;
-            }
-            .accueil-subtitle {
-                font-size: 1.4em;
-                color: #333;
-                margin-bottom: 1.5em;
-            }
-            .accueil-description {
-                font-size: 1.1em;
-                color: #444;
-                line-height: 1.7;
-                max-width: 800px;
-                margin: auto;
-                text-align: left;
-            }
-            .accueil-footer {
-                margin-top: 2.5rem;
-                color: #666;
-                font-style: italic;
-                font-size: 0.95em;
-            }
-        </style>
+    st.markdown("## 💧 Water Quality App")
+    st.markdown("### Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie")
 
-        <div class="accueil-container">
-            <h1 class="accueil-title">💧 Water Quality App</h1>
-            <p class="accueil-subtitle">Plateforme intelligente pour l’analyse de la qualité de l’eau potable en Algérie</p>
+    st.info(\"\"\"
+    **🎓 Initiateurs :**  
+   👨‍🎓 Yanis FETOUH – Étudiant chercheur  
+   👩‍🎓 Louisa Lysa AYAD – Étudiante chercheuse  
 
-            <div class="accueil-description">
-                <p><b>🎓 Initiateurs :</b><br>
-                👨‍🎓 <b>Yanis FETOUH</b> – Étudiant chercheur<br>
-                👩‍🎓 <b>Louisa Lysa AYAD</b> – Étudiante chercheuse</p>
+    **🧑‍🏫 Encadrement :**  
+    👩‍🏫 BOUCHRAKI – Promotrice  
+    👨‍🏫 [Nom du Co-promoteur] – Co-promoteur  
 
-                <p><b>🧑‍🏫 Encadrement :</b><br>
-                👩‍🏫 <b>BOUCHRAKI</b> – Promotrice<br>
-                👨‍🏫 <b>[Nom du Co‑promoteur]</b> – Co‑promoteur</p>
+    **🤝 En collaboration avec :**  
+    🔬 Laboratoire de l’Algérienne des Eaux  
 
-                <p><b>🤝 En collaboration avec :</b><br>
-                🔬 <b>Laboratoire de l’Algérienne des Eaux</b></p>
+    🏛️ Faculté de Technologie – Département d’Hydraulique  
+    Université Abderrahmane Mira de Béjaïa  
 
-                <p><b>🏛️ Faculté de Technologie</b> – Département d’Hydraulique<br>
-                <b>Université Abderrahmane Mira de Béjaïa</b></p>
+    Ce projet s’inscrit dans une dynamique de **recherche scientifique appliquée**, visant à contribuer à l’amélioration de la **santé publique**.
+    \"\"\")
 
-                <p>Ce projet s’inscrit dans une dynamique de <b>recherche scientifique appliquée</b>,
-                visant à contribuer à l’amélioration de la <b>santé publique</b> et de la <b>gestion des ressources en eau</b> en Algérie.</p>
-            </div>
+    st.markdown("*Version 1.0 – Propulsée par la science, l’innovation et la passion pour l’environnement 💙*")
 
-            <div class="accueil-footer">
-                Version 1.0 – Propulsée par la science, l’innovation et la passion pour l’environnement 💙
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
 # -----------------------------
 # Page : Classification (placeholder)
