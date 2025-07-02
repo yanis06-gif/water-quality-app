@@ -14,18 +14,20 @@ from io import BytesIO
 # ✅ Initialisation de la page active
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
+
 if st.session_state.page == "Accueil":
-    st.markdown("## 💧 Water Quality Application 1.0")
+    st.markdown("## Water Quality Application 1.0")
     st.markdown("### Automation of water quality classification using a weighted index")
 
     # Action bouton → entrée dans l'application
     if st.button("Go to main menu"):
         st.session_state.page = "accueil_interne"
         st.rerun()
+
 if st.session_state.page == "accueil_interne":
     st.title("Main Menu")
     col1, col2, col3 = st.columns(3)
-    
+
     with col1:
         if st.button("Data Entry"):
             st.session_state.page = "Data Entry"
@@ -33,9 +35,10 @@ if st.session_state.page == "accueil_interne":
         if st.button("Water Quality Classification"):
             st.session_state.page = "Water Quality Classification"
             st.rerun()
-        if st.button("Data Visualization")
+        if st.button("Data Visualization"):
             st.session_state.page = "Data Visualization"
-            st.rerurn()
+            st.rerun()
+
 #################
 # BASE DE DONNEE
 #################
