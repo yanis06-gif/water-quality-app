@@ -13,7 +13,9 @@ from fpdf import FPDF
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
-# ✅ Page d'accueil
+# =====================================
+# ✅ PAGE D'ACCUEIL
+# =====================================
 if st.session_state.page == "Accueil":
     st.markdown("## 💧 Water Quality Application 1.0")
     st.markdown("### Automation of water quality classification using a weighted index")
@@ -22,7 +24,9 @@ if st.session_state.page == "Accueil":
         st.session_state.page = "accueil_interne"
         st.rerun()
 
-# ✅ Menu principal
+# =====================================
+# ✅ MENU PRINCIPAL
+# =====================================
 elif st.session_state.page == "accueil_interne":
     st.title("Main Menu")
     st.markdown("Choose an option below:")
@@ -48,6 +52,7 @@ elif st.session_state.page == "accueil_interne":
     if st.button("🔙 Back to Home"):
         st.session_state.page = "Accueil"
         st.rerun()
+
 
 #################
 # BASE DE DONNEE
