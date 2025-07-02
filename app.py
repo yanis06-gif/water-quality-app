@@ -9,7 +9,9 @@ import traceback
 import plotly.express as px
 from fpdf import FPDF
 
-
+# ✅ Initialisation de la page active
+if "page" not in st.session_state:
+    st.session_state.page = "Accueil"
 
 # =====================================
 # ✅ PAGE D'ACCUEIL
@@ -50,7 +52,6 @@ elif st.session_state.page == "accueil_interne":
     if st.button("🔙 Back to Home"):
         st.session_state.page = "Accueil"
         st.rerun()
-
 
 #################
 # BASE DE DONNEE
