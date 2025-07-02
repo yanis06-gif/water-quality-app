@@ -13,12 +13,11 @@ from fpdf import FPDF
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
-# ✅ Accueil
+# ✅ Page d'accueil
 if st.session_state.page == "Accueil":
     st.markdown("## 💧 Water Quality Application 1.0")
     st.markdown("### Automation of water quality classification using a weighted index")
 
-    # Bouton pour aller au menu principal
     if st.button("➡️ Go to main menu"):
         st.session_state.page = "accueil_interne"
         st.rerun()
@@ -45,7 +44,6 @@ elif st.session_state.page == "accueil_interne":
             st.session_state.page = "Data Visualization"
             st.rerun()
 
-    # 🔙 Retour à l’accueil
     st.markdown("---")
     if st.button("🔙 Back to Home"):
         st.session_state.page = "Accueil"
