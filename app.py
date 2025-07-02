@@ -7,16 +7,14 @@ from datetime import datetime
 from io import BytesIO
 import traceback
 import plotly.express as px
-
 from fpdf import FPDF
-from io import BytesIO
 
 # ✅ Initialisation de la page active
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
 if st.session_state.page == "Accueil":
-    st.markdown("## Water Quality Application 1.0")
+    st.markdown("## 💧 Water Quality Application 1.0")
     st.markdown("### Automation of water quality classification using a weighted index")
 
     # Action bouton → entrée dans l'application
@@ -24,7 +22,7 @@ if st.session_state.page == "Accueil":
         st.session_state.page = "accueil_interne"
         st.rerun()
 
-if st.session_state.page == "accueil_interne":
+elif st.session_state.page == "accueil_interne":
     st.title("Main Menu")
     col1, col2, col3 = st.columns(3)
 
