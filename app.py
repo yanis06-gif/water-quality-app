@@ -13,29 +13,43 @@ from fpdf import FPDF
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
+# ✅ Accueil
 if st.session_state.page == "Accueil":
     st.markdown("## 💧 Water Quality Application 1.0")
     st.markdown("### Automation of water quality classification using a weighted index")
 
-    # Action bouton → entrée dans l'application
-    if st.button("Go to main menu"):
+    # Bouton pour aller au menu principal
+    if st.button("➡️ Go to main menu"):
         st.session_state.page = "accueil_interne"
         st.rerun()
 
+# ✅ Menu principal
 elif st.session_state.page == "accueil_interne":
     st.title("Main Menu")
+    st.markdown("Choose an option below:")
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
         if st.button("Data Entry"):
             st.session_state.page = "Data Entry"
             st.rerun()
+
+    with col2:
         if st.button("Water Quality Classification"):
             st.session_state.page = "Water Quality Classification"
             st.rerun()
+
+    with col3:
         if st.button("Data Visualization"):
             st.session_state.page = "Data Visualization"
             st.rerun()
+
+    # 🔙 Retour à l’accueil
+    st.markdown("---")
+    if st.button("🔙 Back to Home"):
+        st.session_state.page = "Accueil"
+        st.rerun()
 
 #################
 # BASE DE DONNEE
