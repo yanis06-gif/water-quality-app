@@ -9,7 +9,8 @@ import traceback
 import plotly.express as px
 
 from fpdf import FPDF
-from io import BytesIOif st.session_state.page == "Accueil":
+from io import BytesIO
+if st.session_state.page == "Accueil":
 
 # ✅ Initialisation de la page active
 if "page" not in st.session_state:
