@@ -19,7 +19,14 @@ if "page" not in st.session_state:
 if st.session_state.page == "Accueil":
     st.markdown("## 💧 Water Quality Application 1.0")
     st.markdown("### Automation of water quality classification using a weighted index")
+    st.info("""
 
+    🏛️ University of Bejaia
+       Faculty of Technology
+       Hydraulics Departempent 
+       Laboratory of Applied Hydraulics and Environment Research (LRHAE) 
+       06000, Bejaia, Algeria
+    """)
     if st.button("➡️ Go to main menu"):
         st.session_state.page = "accueil_interne"
         st.rerun()
