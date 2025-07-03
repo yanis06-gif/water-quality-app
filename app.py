@@ -36,7 +36,8 @@ if st.session_state.page == "Accueil":
                 margin-bottom: 0.5rem;
             }
             .accueil-subtitle {
-                font-size: 2.0em;
+                font-size: 1.8em;
+                font-weight: bold;
                 color: #333;
                 margin-bottom: 1.5rem;
             }
@@ -56,10 +57,10 @@ if st.session_state.page == "Accueil":
             <div class="accueil-title">💧 Water Quality Application </div>
             <div class="accueil-subtitle">Automation of water quality classification using a weighted index</div>
             <div class="accueil-info">
-                🏛️ <b>University of Bejaia</b><br>
-                Faculty of Technology,<br>
-                Hydraulics Department,<br>
-                Laboratory of Applied Hydraulics and Environment Research (LRHAE),<br>
+                🏛️ <b>University of Bejaia,
+                Faculty of Technology,
+                Hydraulics Department,
+                Laboratory of Applied Hydraulics and Environment Research (LRHAE),
                 06000, Bejaia, Algeria
             </div>
         </div>
