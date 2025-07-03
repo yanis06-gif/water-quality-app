@@ -36,7 +36,7 @@ if st.session_state.page == "Accueil":
                 margin-bottom: 0.5rem;
             }
             .accueil-subtitle {
-                font-size: 1.3em;
+                font-size: 2.0em;
                 color: #333;
                 margin-bottom: 1.5rem;
             }
@@ -53,7 +53,7 @@ if st.session_state.page == "Accueil":
         </style>
 
         <div class="accueil-container">
-            <div class="accueil-title">💧 Water Quality Application Version 1.0</div>
+            <div class="accueil-title">💧 Water Quality Application </div>
             <div class="accueil-subtitle">Automation of water quality classification using a weighted index</div>
             <div class="accueil-info">
                 🏛️ <b>University of Bejaia</b><br>
