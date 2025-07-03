@@ -81,7 +81,6 @@ if st.session_state.page == "Data Entry":
         ]
 
     st.markdown("## 📋 Gestion des prélèvements ADE")
-    st.button("❓ Besoin d’aide ici ?", on_click=lambda: st.session_state.update(page="Assistant"))
     st.info("Ajoutez, visualisez, modifiez et exportez les données de qualité de l’eau.")
 
     # 🔧 Gestion des paramètres personnalisés
