@@ -17,7 +17,7 @@ if "page" not in st.session_state:
 # ✅ PAGE D'ACCUEIL
 # =====================================
 if st.session_state.page == "Accueil":
-    st.markdown("## 💧 Water Quality Application 1.0")
+    st.markdown("## 💧 Water Quality Application Version 1.0")
     st.markdown("### Automation of water quality classification using a weighted index")
     st.info("""
 
