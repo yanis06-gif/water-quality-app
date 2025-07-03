@@ -17,19 +17,61 @@ if "page" not in st.session_state:
 # ✅ PAGE D'ACCUEIL
 # =====================================
 if st.session_state.page == "Accueil":
-    st.markdown("## 💧 Water Quality Application Version 1.0")
-    st.markdown("### Automation of water quality classification using a weighted index")
-    st.info("""
+    st.markdown(
+        """
+        <style>
+            .accueil-container {
+                text-align: center;
+                padding: 2rem;
+                background: linear-gradient(135deg, #dceeff, #ffffff);
+                border-radius: 15px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                max-width: 800px;
+                margin: auto;
+            }
+            .accueil-title {
+                font-size: 2.5em;
+                font-weight: bold;
+                color: #0077cc;
+                margin-bottom: 0.5rem;
+            }
+            .accueil-subtitle {
+                font-size: 1.3em;
+                color: #333;
+                margin-bottom: 1.5rem;
+            }
+            .accueil-info {
+                background-color: #f0f8ff;
+                padding: 1rem;
+                border-radius: 10px;
+                display: inline-block;
+                text-align: left;
+                font-size: 1.1em;
+                color: #333;
+                margin-top: 1rem;
+            }
+        </style>
 
-    🏛️ University of Bejaia,
-       Faculty of Technology,
-       Hydraulics Departempent,
-       Laboratory of Applied Hydraulics and Environment Research (LRHAE), 
-       06000, Bejaia, Algeria
-    """)
-    if st.button("➡️ Go to main menu"):
+        <div class="accueil-container">
+            <div class="accueil-title">💧 Water Quality Application Version 1.0</div>
+            <div class="accueil-subtitle">Automation of water quality classification using a weighted index</div>
+            <div class="accueil-info">
+                🏛️ <b>University of Bejaia</b><br>
+                Faculty of Technology,<br>
+                Hydraulics Department,<br>
+                Laboratory of Applied Hydraulics and Environment Research (LRHAE),<br>
+                06000, Bejaia, Algeria
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("")
+    if st.button("➡️ Go to main menu", help="Click here to enter the main menu."):
         st.session_state.page = "accueil_interne"
         st.rerun()
+
 
 # =====================================
 # ✅ MENU PRINCIPAL
