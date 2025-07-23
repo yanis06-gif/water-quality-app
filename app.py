@@ -60,8 +60,8 @@ if st.session_state.page == "Accueil":
         </style>
 
         <div class="accueil-container">
-            <div class="accueil-title">💧 Water Quality Application</div>
-            <div class="accueil-subtitle">Automation of water quality classification using a weighted index</div>
+            <div class="accueil-title">💧 Water Quality Assessment</div>
+            <div class="accueil-subtitle">Water Quality Assessment Using the Random Forest Classification Model</div>
             <div class="accueil-info">
                 🏛️ <b>University of Bejaia,
                 Faculty of Technology,
@@ -83,34 +83,47 @@ if st.session_state.page == "Accueil":
         st.rerun()
 
 
-# =====================================
-# ✅ MENU PRINCIPAL
-# =====================================
 elif st.session_state.page == "accueil_interne":
-    st.title("Main Menu")
-    st.markdown("Choose an option below:")
+    st.markdown("<h1 style='text-align: center; color: #0099ff;'>🌊 Water Quality - Menu Principal</h1>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>Veuillez choisir une option ci-dessous :</h4>", unsafe_allow_html=True)
+    st.markdown("")
+
+    # Style personnalisé
+    card_style = """
+        <div style='background-color: #f0f2f6; padding: 20px; border-radius: 15px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); text-align: center;'>
+            <h2 style='color: #0066cc;'>{title}</h2>
+            <p style='font-size: 16px; color: #333;'>{description}</p>
+            <button style='padding: 10px 20px; font-size: 16px; background-color: #0099ff; color: white; border: none; border-radius: 8px; cursor: pointer;' onclick="window.location.href='{action}'">Ouvrir</button>
+        </div>
+    """
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.button("Data Entry"):
+        if st.button("📋 Saisie des Données", use_container_width=True):
             st.session_state.page = "Data Entry"
             st.rerun()
+        st.markdown("<p style='text-align: center;'>Ajouter ou modifier des prélèvements</p>", unsafe_allow_html=True)
 
     with col2:
-        if st.button("Water Quality Classification"):
+        if st.button("📊 Classification", use_container_width=True):
             st.session_state.page = "Water Quality Classification"
             st.rerun()
+        st.markdown("<p style='text-align: center;'>Classer la qualité de l'eau</p>", unsafe_allow_html=True)
 
     with col3:
-        if st.button("Data Visualization"):
+        if st.button("📈 Visualisation", use_container_width=True):
             st.session_state.page = "Data Visualization"
             st.rerun()
+        st.markdown("<p style='text-align: center;'>Voir les résultats en graphiques</p>", unsafe_allow_html=True)
 
     st.markdown("---")
-    if st.button("🔙 Back to Home"):
+    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+    if st.button("🔙 Retour à l'accueil"):
         st.session_state.page = "Accueil"
         st.rerun()
+    st.markdown("</div>", unsafe_allow_html=True)
+
 
 #################
 # BASE DE DONNEE
