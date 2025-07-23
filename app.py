@@ -23,7 +23,7 @@ if st.session_state.page == "Accueil":
             .accueil-container {
                 text-align: center;
                 padding: 2rem;
-                background: linear-gradient(135deg, #dceeff, #ffffff);
+                background: linear-gradient(135deg, #a8f0a5, #e0ffe0);  /* Dégradé vert clair */
                 border-radius: 15px;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                 max-width: 800px;
@@ -32,7 +32,7 @@ if st.session_state.page == "Accueil":
             .accueil-title {
                 font-size: 2.5em;
                 font-weight: bold;
-                color: #0077cc;
+                color: #006400; /* Vert foncé */
                 margin-bottom: 0.5rem;
             }
             .accueil-subtitle {
@@ -42,7 +42,7 @@ if st.session_state.page == "Accueil":
                 margin-bottom: 1.5rem;
             }
             .accueil-info {
-                background-color: #f0f8ff;
+                background-color: #f0fff0; /* Vert très clair */
                 padding: 1rem;
                 border-radius: 10px;
                 display: inline-block;
@@ -57,6 +57,8 @@ if st.session_state.page == "Accueil":
                 color: #555;
                 font-style: italic;
             }
+
+
         </style>
 
         <div class="accueil-container">
