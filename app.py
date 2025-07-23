@@ -87,7 +87,7 @@ if st.session_state.page == "Accueil":
 
 elif st.session_state.page == "accueil_interne":
     st.markdown("<h1 style='text-align: center; color: #0099ff;'>🌊 Water Quality - Menu Principal</h1>", unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center;'>Veuillez choisir une option ci-dessous :</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>Please select one option from below :</h4>", unsafe_allow_html=True)
     st.markdown("")
 
     # Style personnalisé
@@ -102,26 +102,26 @@ elif st.session_state.page == "accueil_interne":
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.button("📋 Saisie des Données", use_container_width=True):
+        if st.button("📋 Data Input", use_container_width=True):
             st.session_state.page = "Data Entry"
             st.rerun()
-        st.markdown("<p style='text-align: center;'>Ajouter ou modifier des prélèvements</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>Add or modify water withdrawals</p>", unsafe_allow_html=True)
 
     with col2:
         if st.button("📊 Classification", use_container_width=True):
             st.session_state.page = "Water Quality Classification"
             st.rerun()
-        st.markdown("<p style='text-align: center;'>Classer la qualité de l'eau</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>Classify water quality</p>", unsafe_allow_html=True)
 
     with col3:
-        if st.button("📈 Visualisation", use_container_width=True):
+        if st.button("📈 Visualization", use_container_width=True):
             st.session_state.page = "Data Visualization"
             st.rerun()
-        st.markdown("<p style='text-align: center;'>Voir les résultats en graphiques</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>See the results in graphical from</p>", unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    if st.button("🔙 Retour à l'accueil"):
+    if st.button("🔙 Back to homme page"):
         st.session_state.page = "Accueil"
         st.rerun()
     st.markdown("</div>", unsafe_allow_html=True)
