@@ -17,114 +17,41 @@ if "page" not in st.session_state:
 # ✅ PAGE D'ACCUEIL
 # =====================================
 if st.session_state.page == "Accueil":
-    st.markdown(
-        """
-        <style>
-            .accueil-container {
-                text-align: center;
-                padding: 2rem;
-                background: linear-gradient(135deg, #a8f0a5, #e0ffe0);  /* Dégradé vert clair */
-                border-radius: 15px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                max-width: 800px;
-                margin: auto;
-            }
-            .accueil-title {
-                font-size: 2.5em;
-                font-weight: bold;
-                color: #006400; /* Vert foncé */
-                margin-bottom: 0.5rem;
-            }
-            .accueil-subtitle {
-                font-size: 1.8em;
-                font-weight: bold;
-                color: #333;
-                margin-bottom: 1.5rem;
-            }
-            .accueil-info {
-                background-color: #f0fff0; /* Vert très clair */
-                padding: 1rem;
-                border-radius: 10px;
-                display: inline-block;
-                text-align: left;
-                font-size: 1.1em;
-                color: #333;
-                margin-top: 1rem;
-            }
-            .accueil-version {
-                margin-top: 1.5rem;
-                font-size: 1.2em;
-                color: #555;
-                font-style: italic;
-            }
+    st.markdown("## 💧 Water Quality Application 1.0")
+    st.markdown("### Automation of water quality classification using a weighted index")
 
-
-        </style>
-
-        <div class="accueil-container">
-            <div class="accueil-title">💧 Water Quality Assessment</div>
-            <div class="accueil-subtitle">Water Quality Assessment Using the Random Forest Classification Model</div>
-            <div class="accueil-info">
-                🏛️ <b>University of Bejaia,
-                Faculty of Technology,
-                Hydraulics Department,
-                Laboratory of Applied Hydraulics and Environment Research (LRHAE),
-                06000, Bejaia, Algeria
-            </div>
-            <div class="accueil-version">
-                Version 1.0
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.markdown("")
-    if st.button("➡️ Go to main menu", help="Click here to enter the main menu."):
+    if st.button("➡️ Go to main menu"):
         st.session_state.page = "accueil_interne"
         st.rerun()
 
-
+# =====================================
+# ✅ MENU PRINCIPAL
+# =====================================
 elif st.session_state.page == "accueil_interne":
-    st.markdown("<h1 style='text-align: center; color: #0099ff;'>🌊 Water Quality - Menu Principal</h1>", unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center;'>Please select one option from below :</h4>", unsafe_allow_html=True)
-    st.markdown("")
-
-    # Style personnalisé
-    card_style = """
-        <div style='background-color: #f0f2f6; padding: 20px; border-radius: 15px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); text-align: center;'>
-            <h2 style='color: #0066cc;'>{title}</h2>
-            <p style='font-size: 16px; color: #333;'>{description}</p>
-            <button style='padding: 10px 20px; font-size: 16px; background-color: #0099ff; color: white; border: none; border-radius: 8px; cursor: pointer;' onclick="window.location.href='{action}'">Ouvrir</button>
-        </div>
-    """
+    st.title("Main Menu")
+    st.markdown("Choose an option below:")
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.button("📋 Data Input", use_container_width=True):
+        if st.button("Data Entry"):
             st.session_state.page = "Data Entry"
             st.rerun()
-        st.markdown("<p style='text-align: center;'>Add or modify water withdrawals</p>", unsafe_allow_html=True)
 
     with col2:
-        if st.button("📊 Classification", use_container_width=True):
+        if st.button("Water Quality Classification"):
             st.session_state.page = "Water Quality Classification"
             st.rerun()
-        st.markdown("<p style='text-align: center;'>Classify water quality</p>", unsafe_allow_html=True)
 
     with col3:
-        if st.button("📈 Visualization", use_container_width=True):
+        if st.button("Data Visualization"):
             st.session_state.page = "Data Visualization"
             st.rerun()
-        st.markdown("<p style='text-align: center;'>See the results in graphical from</p>", unsafe_allow_html=True)
 
     st.markdown("---")
-    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    if st.button("🔙 Back to homme page"):
+    if st.button("🔙 Back to Home"):
         st.session_state.page = "Accueil"
         st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
 
 
 #################
@@ -148,6 +75,7 @@ if st.session_state.page == "Data Entry":
         ]
 
     st.markdown("## 📋 Gestion des prélèvements ADE")
+    st.button("❓ Besoin d’aide ici ?", on_click=lambda: st.session_state.update(page="Assistant"))
     st.info("Ajoutez, visualisez, modifiez et exportez les données de qualité de l’eau.")
 
     # 🔧 Gestion des paramètres personnalisés
